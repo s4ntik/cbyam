@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				if (data.status === "true") {
 					// Display the extracted data in the "json-data" div
 					var username = data.username;
-					var site = data.site === 1 ? 'CB' : data.site === 2 ? 'SC' : 'Unknown';
+					var site = data.site === "1" ? 'CB' : data.site === "2" ? 'SC' : 'Unknown';
 					jsonDataDiv.style.visibility = 'visible';
 					jsonDataDiv.textContent = site + ': ' + username;
 				} else {
