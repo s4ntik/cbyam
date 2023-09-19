@@ -1,0 +1,114 @@
+:root {
+  --main-color: #ff2d89;
+}
+
+body {
+  font-family: monospace;
+  word-spacing: -5px;
+  font-weight: bold;
+  text-shadow: -1px 1px 2px black;
+  font-size: 25px;
+  margin-left: 110px;
+}
+
+.clock-output {
+  position: absolute;
+  padding: 10px;
+  bottom: 0;
+  right: 36px;
+}
+
+#date {
+  color: white;
+  top: 0px;
+  right: 150px;
+}
+
+#json-data {
+  font-size: 16px;
+  color: white;
+  text-shadow: -1px 1px 1px black;
+  top: 110px;
+  right: 40px;
+  height: 20px;
+  padding: 2px;
+}
+
+#time {
+  color: var(--main-color);
+  top: 0px;
+  right: 32px;
+}
+
+#countdown {
+  background-image: linear-gradient(
+    to right,
+    #9c4f96,
+    #ff6355,
+    #fba949,
+    #fae442,
+    #8bd448,
+    #2aa8f2,
+    #9c4f96
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: move 210s linear infinite;
+  text-shadow: none;
+  filter: drop-shadow(-1px 1px 1px black);
+}
+
+@keyframes move {
+  to {
+    background-position: 4500vh;
+  }
+}
+
+#countdown-display {
+  color: white;
+}
+
+svg path[fill="#FF2D89"] {
+  fill: var(--main-color);
+}
+
+#countdown-container {
+  display: flex;
+  align-items: center;
+}
+
+.centered-text {
+  visibility: hidden;
+  text-align: center;
+  word-spacing: 0;
+  color: white;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Figtree", sans-serif;
+}
+
+.small-text {
+  color: var(--main-color);
+  font-size: 30px;
+}
+
+.big-text {
+  font-size: 65px;
+  animation: in 8s ease-out forwards infinite;
+  animation-delay: 1s;
+}
+
+@keyframes in {
+  0% {
+    letter-spacing: 0px;
+  }
+  50% {
+    letter-spacing: 10px;
+  }
+  100% {
+    letter-spacing: 0px;
+  }
+}
