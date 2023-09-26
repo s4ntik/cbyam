@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function updateJsonData() {
 		// Use environment variables
 		var apiKey = 'q7Y1qj9sszVjRG4VJfmqNFdLurZEUoWSzw9x7HFSqE';
-		var apiUrl = 'https://api.jsonsilo.com/public/f019f4f4-ee0b-4aee-b619-4776b6cff56f';
+		var apiUrl = 'https://api.jsonsilo.com/f019f4f4-ee0b-4aee-b619-4776b6cff56f';
 
 		fetch(apiUrl, {
 				method: 'GET',
