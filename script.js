@@ -36,14 +36,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	function updateJsonData() {
 		// Use environment variables
-		var apiKey = '$2a$10$QPfLNnNVeEMEgIqh0o9eZOThxz4QiQj2QjNz7AlW/iethFoFyUrsO';
-		var apiUrl = 'https://api.jsonbin.io/v3/b/6508fbd54138103063578140';
+		var apiKey = 'q7Y1qj9sszVjRG4VJfmqNFdLurZEUoWSzw9x7HFSqE';
+		var apiUrl = 'https://api.jsonsilo.com/public/f019f4f4-ee0b-4aee-b619-4776b6cff56f';
 
 		fetch(apiUrl, {
 				method: 'GET',
 				headers: {
-					'X-Access-Key': apiKey,
-					'X-Bin-Meta': false
+					'X-SILO-KEY': apiKey,
 				}
 			})
 			.then(function(response) {
