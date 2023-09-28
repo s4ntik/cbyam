@@ -34,13 +34,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to update JSON data
     function updateJsonData() {
         // Use environment variables
-        var apiKey = 'q7Y1qj9sszVjRG4VJfmqNFdLurZEUoWSzw9x7HFSqE';
-        var apiUrl = 'https://api.jsonsilo.com/f019f4f4-ee0b-4aee-b619-4776b6cff56f';
+        var apiUrl = 'https://api.npoint.io/0689840ed795f3f9e622';
 
         fetch(apiUrl, {
             method: 'GET',
             headers: {
-                'X-SILO-KEY': apiKey,
             }
         })
         .then(function(response) {
