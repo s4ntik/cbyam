@@ -34,49 +34,61 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 
-    // Function to update JSON data
-    function updateJsonData() {
-        // Use environment variables
-        var apiUrl = 'https://api.npoint.io/0689840ed795f3f9e622';
+	// Function to update JSON data
+	function updateJsonData() {
+		// Use environment variables
+		var apiUrl = 'https://api.npoint.io/0689840ed795f3f9e622';
 
-        fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-            }
-        })
+		fetch(apiUrl, {
+				method: 'GET',
+				headers: {}
+			})
 			.then(function(response) {
 				return response.json();
 			})
 			.then(function(data) {
 				var jsonDataDiv = document.getElementById("json-data");
-				var centeredTextDiv = document.querySelector(".centered-text"); // Select the element with the class "centered-text"
+				var centeredTextDiv = document.querySelector(".centered-text");
 
 				if (data.status === "true") {
-					// Display the extracted data in the "json-data" div
 					var username = data.username;
 					var site = parseInt(data.site, 10) === 1 ? 'CB' : parseInt(data.site, 10) === 2 ? 'SC' : 'Unknown';
+
+					// Display the extracted data in the "json-data" div
 					jsonDataDiv.style.visibility = 'visible';
 					jsonDataDiv.textContent = site + ': ' + username;
+
+					// Update the big-text element
+					var bigTextElement = document.querySelector(".big-text");
+					if (data['big-text']) {
+						bigTextElement.innerText = data['big-text'];
+					}
 				} else {
-					// Hide the "json-data" div when status is not true
 					jsonDataDiv.style.visibility = 'hidden';
 					jsonDataDiv.textContent = '';
+
+					// Reset the big-text element if status is not true
+					var bigTextElement = document.querySelector(".big-text");
+					bigTextElement.innerText = "I'll be right back"; // Provide a default text if needed
 				}
 
 				if (data.break === "true") {
-					// Display the extracted data in the "json-data" div
 					centeredTextDiv.style.visibility = 'visible';
+					centeredTextDiv.style.opacity = '1';
+					centeredTextDiv.style.transition = 'opacity 2s linear';
 				} else {
-					// Hide the "json-data" div when break is not true
-					centeredTextDiv.style.visibility = 'hidden';
+					centeredTextDiv.style.visibility = 'hidden';					
+					centeredTextDiv.style.opacity = '0';
+					centeredTextDiv.style.transition = 'visibility 0s 2s, opacity 2s linear';
 				}
 			})
 			.catch(function(error) {
 				console.error('Error fetching JSON data:', error);
 				var jsonDataDiv = document.getElementById("json-data");
-				jsonDataDiv.style.visibility = 'hidden'; // Hide the div in case of an error
+				jsonDataDiv.style.visibility = 'hidden';
 			});
 	}
+
 
 	// Calculate the target time for today and update the countdown
 	var targetTimeToday = moment().set({
