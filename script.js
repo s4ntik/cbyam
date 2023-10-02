@@ -47,37 +47,42 @@ document.addEventListener("DOMContentLoaded", function() {
 				return response.json();
 			})
 			.then(function(data) {
+				console.log('Data:', data);
+
 				var jsonDataDiv = document.getElementById("json-data");
 				var centeredTextDiv = document.querySelector(".centered-text");
+				var bigTextElement = document.querySelector(".big-text");
 
+				// Update the big-text element based on data.break
+				if (data.break === "true" && data['big-text'] !== "") {
+					console.log('Updating big text element:', data['big-text']);
+					bigTextElement.innerText = data['big-text'];
+				} else {
+					console.log('Condition not met for updating big text. data.break:', data.break, 'data[\'big-text\']:', data['big-text']);
+
+					// Use default text if 'big-text' is empty
+					bigTextElement.innerText = "I'll Be Right Back";
+				}
+
+				// Display the extracted data in the "json-data" div
+				var username = data.username;
+				var site = parseInt(data.site, 10) === 1 ? 'CB' : parseInt(data.site, 10) === 2 ? 'SC' : 'Unknown';
+
+				jsonDataDiv.textContent = site + ': ' + username;
+
+				// Update visibility and animation based on data.status and data.break
 				if (data.status === "true") {
-					var username = data.username;
-					var site = parseInt(data.site, 10) === 1 ? 'CB' : parseInt(data.site, 10) === 2 ? 'SC' : 'Unknown';
-
-					// Display the extracted data in the "json-data" div
 					jsonDataDiv.style.visibility = 'visible';
-					jsonDataDiv.textContent = site + ': ' + username;
-
-					// Update the big-text element
-					var bigTextElement = document.querySelector(".big-text");
-					if (data['big-text']) {
-						bigTextElement.innerText = data['big-text'];
-					}
 				} else {
 					jsonDataDiv.style.visibility = 'hidden';
-					jsonDataDiv.textContent = '';
-
-					// Reset the big-text element if status is not true
-					var bigTextElement = document.querySelector(".big-text");
-					bigTextElement.innerText = "I'll be right back"; // Provide a default text if needed
 				}
 
 				if (data.break === "true") {
 					centeredTextDiv.style.visibility = 'visible';
 					centeredTextDiv.style.opacity = '1';
-					centeredTextDiv.style.transition = 'opacity 2s linear';
+					centeredTextDiv.style.animation = 'bounce-in-top 1.1s both';
 				} else {
-					centeredTextDiv.style.visibility = 'hidden';					
+					centeredTextDiv.style.visibility = 'hidden';
 					centeredTextDiv.style.opacity = '0';
 					centeredTextDiv.style.transition = 'visibility 0s 2s, opacity 2s linear';
 				}
