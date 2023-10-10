@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>OBS Overlay</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-  </head>
-  <body translate="no">
-    <!-- Container for the image, date, and time -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles-score.css">
+  <title>OBS Overlay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@1,900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<body translate="no">
+  <!-- Container for the image, date, and time -->
     <div style="position: relative;">
       <!-- SVG Path -->
       <svg height="190" style="position: absolute; top: -8px; right: -8px;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 324 190" xml:space="preserve">
@@ -72,25 +74,40 @@
         <polygon points="131 58.9 136.5 66.3 128.6 62.9" fill="#FF2D89" />
         <path d="m150 64.9s1.4 1.1 1.4 3.7c0 4.2-4.7 10.7-12.6 10.7s-12.6-6.6-12.6-10.7c0-2.5 1.4-3.7 1.4-3.7s1.5 1.8 2.3 3.4c0.6 1.3 2 5.4 2 5.4l1.5-4.4s2.4 1.1 5.4 1.1c3.2 0 5.4-1.1 5.4-1.1l1.5 4.4s1-3.2 2-5.4c0.7-1.2 2.3-3.4 2.3-3.4z" fill="#FF2D89" />
       </svg>
-      <!-- Date -->
-      <div id="date" class="clock-output"></div>
-      <!-- Time -->
-      <div id="time" class="clock-output"></div>
+    <!-- Date -->
+    <div id="date" class="clock-output"></div>
+    <!-- Time -->
+    <div id="time" class="clock-output"></div>
+  </div>
+  <!-- Countdown Timer -->
+  <div id="countdown-container" class="clock-output">
+    <div id="countdown">Shift Ends in:</div>
+    <div id="countdown-display"></div>
+  </div>
+  <!-- JSON Data -->
+  <div id="json-data" class="clock-output"></div>
+  <!-- Centered Text with a Class -->
+  <div class="centered-text">
+    <span class="small-text">Don't go anywhere</span>
+    <br>
+    <span class="big-text"></span>
+  </div>
+
+  <!-- Football Match Section -->
+  <div class="container">
+    <div id="info-container"></div>
+    <div class="match">
+      <div class="match-content">
+        <div class="column" id="home-team-container"></div>
+        <div class="column" id="match-details">
+          <!-- Match details will be populated dynamically -->
+        </div>
+        <div class="column" id="away-team-container"></div>
+      </div>
     </div>
-    <!-- Countdown Timer -->
-    <div id="countdown-container" class="clock-output">
-      <div id="countdown">Shift Ends in:</div>
-      <div id="countdown-display"></div>
-    </div>
-    <!-- JSON Data -->
-    <div id="json-data" class="clock-output"></div>
-    <!-- Centered Text with a Class -->
-    <div class="centered-text">
-      <span class="small-text">Don't go anywhere</span>
-      <br>
-      <span class="big-text"></span>
-    </div>
-    <script src="script.js"></script>
-    <script src="script.data.js"></script>
-  </body>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
