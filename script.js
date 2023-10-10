@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
    };
 
    const fetchData = function () {
-      const apiUrl = "https://api.npoint.io/3ba4b5bfde23959b54e1";
+      const apiUrl = "https://api.npoint.io/0689840ed795f3f9e622";
 
       fetch(apiUrl)
          .then((response) => response.json())
