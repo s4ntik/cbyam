@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const timestamp = new Date().getTime();
             const url =
-               "https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=football&league=nfl®ion=us&lang=en&contentorigin=espn×tamp=" +
+               "https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=football&league=nfl&region=us&lang=en&contentorigin=espn×tamp=" +
                timestamp;
 
             $.ajax({
