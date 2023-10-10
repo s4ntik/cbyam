@@ -1,120 +1,233 @@
-document.addEventListener("DOMContentLoaded", function() {
-	var dateOutput = document.getElementById("date");
-	var timeOutput = document.getElementById("time");
-	var countdownDisplay = document.getElementById("countdown-display");
-	var countdownFinished = false;
-	var jsonDataElement = document.getElementById("json-data");
+document.addEventListener("DOMContentLoaded", function () {
+   const dateOutput = document.getElementById("date");
+   const timeOutput = document.getElementById("time");
+   const countdownDisplay = document.getElementById("countdown-display");
+   let countdownFinished = false;
+   const jsonDataElement = document.getElementById("json-data");
+   let currentEventId = null; // Store the current eventId
 
-	// Function to update the clock
-	var updateClock = function() {
-		var now = moment();
-		dateOutput.innerText = now.format('MMM DD, YYYY');
-		timeOutput.innerText = now.format('HH:mm A');
-	};
+   const containers = {
+      awayTeam: $("#away-team-container"),
+      homeTeam: $("#home-team-container"),
+      matchDetails: $("#match-details"),
+      info: $("#info-container"),
+   };
 
-	// Function to update the countdown
-	function updateCountdown() {
-		var now = new Date().getTime();
+   const createTeamDiv = function (team) {
+      const teamDiv = $('<div class="team">');
+      const teamLogoContainer = $(`<div class="team-logo" style="background-color: #${team.color}">`);
+      const teamLogo = $(`<img src="${team.logo}" alt="${team.displayName}">`);
+      const teamInfo = $('<div class="team-info">');
+      const teamName = $(`<h2 class="team-name">${team.displayName}</h2>`);
+      const teamRecord = $(`<p class="team-record">${team.record}</p>`);
 
-		if (now < targetEndTime) {
-			var timeDiff = targetEndTime - now;
-			var hours = Math.floor(timeDiff / (1000 * 60 * 60));
-			var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-			var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+      teamLogoContainer.append(teamLogo);
+      teamInfo.append(teamName);
+      teamDiv.append(teamLogoContainer, teamInfo, teamRecord);
 
-			var hoursStr = hours.toString().padStart(2, '0');
-			var minutesStr = minutes.toString().padStart(2, '0');
-			var secondsStr = seconds.toString().padStart(2, '0');
+      return teamDiv;
+   };
 
-			countdownDisplay.innerHTML = hoursStr + 'h ' + minutesStr + 'm ' + secondsStr + 's';
-		} else if (!countdownFinished) {
-			countdownDisplay.innerText = 'Thanks to everyone for your Tips, See you next Time!';
-			countdownDisplay.style.color = 'white';
-			countdownFinished = true;
-		}
-	}
+   const displayGameData = function (data, eventId) {
+      const event = data.sports[0].leagues[0].events.find(event => event.id === eventId);
 
-	// Function to update JSON data
-	function updateJsonData() {
-		// Use environment variables
-		var apiUrl = 'https://api.npoint.io/0689840ed795f3f9e622';
+      if (!event) {
+         console.error("Event not found with ID:", eventId);
+         return null; // Returning null in case of an error
+      }
 
-		fetch(apiUrl, {
-				method: 'GET',
-				headers: {}
-			})
-			.then(function(response) {
-				return response.json();
-			})
-			.then(function(data) {
-				console.log('Data:', data);
+      const competitors = event.competitors;
 
-				var jsonDataDiv = document.getElementById("json-data");
-				var centeredTextDiv = document.querySelector(".centered-text");
-				var bigTextElement = document.querySelector(".big-text");
+      const teamsData = competitors.map((team) => ({
+         homeAway: team.homeAway,
+         teamDiv: createTeamDiv(team),
+         score: team.score,
+         record: team.record,
+         winner: team.winner,
+      }));
 
-				// Update the big-text element based on data.break
-				if (data.break === "true" && data['big-text'] !== "") {
-					console.log('Updating big text element:', data['big-text']);
-					bigTextElement.innerText = data['big-text'];
-				} else {
-					console.log('Condition not met for updating big text. data.break:', data.break, 'data[\'big-text\']:', data['big-text']);
+      const gameData = {
+         teamsData: teamsData,
+         matchScore: {
+            score1: competitors[0].score,
+            score2: competitors[1].score,
+         },
+         matchTimeLapsed: event.summary,
+      };
 
-					// Use default text if 'big-text' is empty
-					bigTextElement.innerText = "I'll Be Right Back";
-				}
+      return gameData;
+   };
 
-				// Display the extracted data in the "json-data" div
-				var username = data.username;
-				var site = parseInt(data.site, 10) === 1 ? 'CB' : parseInt(data.site, 10) === 2 ? 'SC' : 'Unknown';
+   const updateHTMLWithData = function (gameData) {
+      // Clear existing content
+      Object.values(containers).forEach((container) => container.empty());
 
-				jsonDataDiv.textContent = site + ': ' + username;
+      gameData.teamsData.forEach((team) => {
+         team.homeAway === "away" ?
+            containers.homeTeam.append(team.teamDiv) :
+            containers.awayTeam.append(team.teamDiv);
+      });
 
-				// Update visibility and animation based on data.status and data.break
-				if (data.status === "true") {
-					jsonDataDiv.style.visibility = 'visible';
-				} else {
-					jsonDataDiv.style.visibility = 'hidden';
-				}
+      const gameInfo = `
+  <div class="match-details">
+    <div class="match-score">
+      <span class="match-score-number${gameData.teamsData[0].winner ? ' match-score-number-winner' : ''}">
+        ${gameData.matchScore.score1}
+      </span>
+      <span class="match-score-divider">:</span>
+      <span class="match-score-number${gameData.teamsData[1].winner ? ' match-score-number-winner' : ''}">
+        ${gameData.matchScore.score2}
+      </span>
+    </div>
+    <div class="match-time-lapsed">${gameData.matchTimeLapsed}</div>
+  </div>
+`;
+      containers.matchDetails.html(gameInfo);
 
-				if (data.break === "true") {
-					centeredTextDiv.style.visibility = 'visible';
-					centeredTextDiv.style.opacity = '1';
-					centeredTextDiv.style.animation = 'bounce-in-top 1.1s both';
-				} else {
-					centeredTextDiv.style.visibility = 'hidden';
-					centeredTextDiv.style.opacity = '0';
-					centeredTextDiv.style.transition = 'visibility 0s 2s, opacity 2s linear';
-				}
-			})
-			.catch(function(error) {
-				console.error('Error fetching JSON data:', error);
-				var jsonDataDiv = document.getElementById("json-data");
-				jsonDataDiv.style.visibility = 'hidden';
-			});
-	}
+      const maxMatchHeight = Math.max(
+         containers.homeTeam.height(),
+         containers.awayTeam.height()
+      );
+      $(".match").height(maxMatchHeight);
+   };
 
+   const updateJsonData = function (data) {
+      console.log('Data:', data);
 
-	// Calculate the target time for today and update the countdown
-	var targetTimeToday = moment().set({
-		'hour': 8,
-		'minute': 0,
-		'second': 0,
-		'millisecond': 0
-	});
-	if (moment().isAfter(targetTimeToday)) {
-		targetTimeToday.add(1, 'days');
-	}
-	var targetEndTime = targetTimeToday.valueOf();
+      const jsonDataDiv = document.getElementById("json-data");
+      const centeredTextDiv = document.querySelector(".centered-text");
+      const bigTextElement = document.querySelector(".big-text");
+      const matchDiv = document.querySelector(".match");
 
-	// Set intervals to update the clock, countdown, and JSON data
-	setInterval(updateClock, 1000);
-	updateClock();
+      if (data.break === "true" && data["big-text"] !== "") {
+         console.log('Updating big text element:', data['big-text']);
+         bigTextElement.innerText = data["big-text"];
+      } else {
+         console.log('Condition not met for updating big text. data.break:', data.break, 'data[\'big-text\']:', data['big-text']);
+         bigTextElement.innerText = data["big-text"];
+      }
 
-	setInterval(updateCountdown, 1000);
-	updateCountdown();
+      const username = data.username;
+      const site =
+         parseInt(data.site, 10) === 1 ?
+         "CB" :
+         parseInt(data.site, 10) === 2 ?
+         "SC" :
+         "Unknown";
 
-	// Initial call to update JSON data
-	setInterval(updateJsonData, 10000);
-	updateJsonData();
+      jsonDataDiv.textContent = `${site}: ${username}`;
+
+      jsonDataDiv.style.visibility = data.status === "true" ? "visible" : "hidden";
+
+      if (data.break === "true") {
+         centeredTextDiv.style.visibility = "visible";
+         centeredTextDiv.style.opacity = "1";
+         centeredTextDiv.style.transition = "opacity 2s linear";
+      } else {
+         centeredTextDiv.style.visibility = "hidden";
+         centeredTextDiv.style.opacity = "0";
+         centeredTextDiv.style.transition =
+            "visibility 0s 2s, opacity 2s linear";
+      }
+      if (data.gamemode === "true") {
+         matchDiv.style.visibility = "visible";
+         matchDiv.style.opacity = "1";
+         matchDiv.style.transition = "opacity 2s linear";
+      } else {
+         matchDiv.style.visibility = "hidden";
+         matchDiv.style.opacity = "0";
+         matchDiv.style.transition =
+            "visibility 0s 2s, opacity 2s linear";
+      }
+
+      // Update currentEventId if eventId is present in the response
+      if (data.eventId) {
+         currentEventId = data.eventId;
+      }
+   };
+
+   const fetchData = function () {
+      const apiUrl = "https://api.npoint.io/3ba4b5bfde23959b54e1";
+
+      fetch(apiUrl)
+         .then((response) => response.json())
+         .then((data) => {
+            updateJsonData(data);
+
+            const timestamp = new Date().getTime();
+            const url =
+               "https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=football&league=nfl®ion=us&lang=en&contentorigin=espn×tamp=" +
+               timestamp;
+
+            $.ajax({
+               url: url,
+               method: "GET",
+               success: function (data) {
+                  const gameData = displayGameData(data, currentEventId);
+                  if (gameData) {
+                     updateHTMLWithData(gameData);
+                  }
+               },
+               error: function (error) {
+                  console.error("Error fetching data:", error);
+               },
+            });
+         })
+         .catch((error) => {
+            console.error('Error fetching JSON data:', error);
+            const jsonDataDiv = document.getElementById("json-data");
+            jsonDataDiv.style.visibility = "hidden";
+         });
+   };
+
+   const updateClock = function () {
+      const now = moment();
+      dateOutput.innerText = now.format("MMM DD, YYYY");
+      timeOutput.innerText = now.format("HH:mm A");
+   };
+
+   const updateCountdown = function () {
+      const now = new Date().getTime();
+
+      if (now < targetEndTime) {
+         const timeDiff = targetEndTime - now;
+         const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+         const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+         const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+         const hoursStr = hours.toString().padStart(2, "0");
+         const minutesStr = minutes.toString().padStart(2, "0");
+         const secondsStr = seconds.toString().padStart(2, "0");
+
+         countdownDisplay.innerHTML = `${hoursStr}h ${minutesStr}m ${secondsStr}s`;
+      } else if (!countdownFinished) {
+         countdownDisplay.innerText =
+            "Thanks to everyone for your Tips, See you next Time!";
+         countdownDisplay.style.color = "white";
+         countdownFinished = true;
+      }
+   };
+
+   const targetTimeToday = moment().set({
+      hour: 8,
+      minute: 0,
+      second: 0,
+      millisecond: 0,
+   });
+
+   if (moment().isAfter(targetTimeToday)) {
+      targetTimeToday.add(1, "days");
+   }
+
+   const targetEndTime = targetTimeToday.valueOf();
+
+   setInterval(updateClock, 1000);
+   setInterval(updateCountdown, 1000);
+   setInterval(updateJsonData, 10000);
+   setInterval(fetchData, 20000); // 20 seconds in milliseconds
+
+   // Initial calls
+   updateClock();
+   updateCountdown();
+   fetchData(); // Initial call to fetch data
 });
