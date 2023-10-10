@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800;900&display=swap");
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+:root {
+  --box-shadow-color: rgba(48, 48, 48, 0.1);
+  --bg-primary: #fff;
+  --bg-secondary: #f3f5f9;
+  --color-text-primary: #1c2a38;
+  --color-text-secondary: #8A8F98;
+  --color-text-alert: #d72641;
+  --color-text-icon: #dbdade;
+  --color-theme-primary: #623ce6;
+}
+
+img {
+  display: block;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.match {
+  padding: 15px;
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.5);
+  transform-origin: left bottom;
+  border-radius: 10px;
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 2px 0 var(--box-shadow-color), 0 4px 4px 0 var(--box-shadow-color);
+}
+
+.match-content {
+  display: flex;
+  position: relative;
+  width: auto;
+}
+
+.column {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.match-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.match-score {
+  display: flex;
+  align-items: center;
+}
+
+.match-score-number {
+  color: var(--color-text-primary);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.match-score-number-winner {
+  color: var(--color-theme-primary);
+}
+
+.match-score-divider {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text-icon);
+  margin: 0 10px;
+}
+
+.match-time-lapsed {
+  color: #DF9443;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+  .column {
+    width: calc(100% / 3);
+  }
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-logo {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  box-shadow: 0 4px 4px 0 rgba(48, 48, 48, 0.15), 0 0 0 15px var(--bg-secondary);
+}
+
+.team-logo img {
+  width: 65px;
+}
+
+.team-info, .team-score, .team-record, .match-time-lapsed, .match-score {
+  font-family: 'Lexend Deca', sans-serif;
+  text-shadow: none;
+}
+
+.team-info {
+  text-shadow: none;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.team-name {
+  color: var(--color-text-primary);
+  padding: 0;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.team-score {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.team-record {
+  padding: 0;
+  margin: 0;
+  font-size: 26px;
+  color: var(--color-text-secondary);
+}
