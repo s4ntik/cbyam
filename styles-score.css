@@ -8,7 +8,7 @@
 
 :root {
   --box-shadow-color: rgba(48, 48, 48, 0.1);
-  --bg-primary: #fff;
+  --bg-primary: rgba(255, 255, 255, 1);
   --bg-secondary: #f3f5f9;
   --color-text-primary: #1c2a38;
   --color-text-secondary: #8A8F98;
@@ -28,6 +28,7 @@ strong {
 .match {
   padding: 15px;
   position: absolute;
+  visibility: hidden;
   left: 30px;
   bottom: 30px;
   display: flex;
@@ -37,6 +38,16 @@ strong {
   border-radius: 10px;
   background-color: var(--bg-primary);
   box-shadow: 0 0 2px 0 var(--box-shadow-color), 0 4px 4px 0 var(--box-shadow-color);
+}
+
+.slide-in {
+    bottom: 30px;
+    transition: opacity 0.6s linear, bottom 0.6s linear;
+}
+
+.slide-out {
+    bottom: -30px;
+    transition: visibility 0s 0.6s, opacity 0.6s linear, bottom 0.6s linear;
 }
 
 .match-content {
@@ -104,6 +115,7 @@ strong {
 }
 
 .team-logo {
+  overflow: hidden;
   width: 100px;
   height: 100px;
   display: flex;
@@ -115,7 +127,7 @@ strong {
 }
 
 .team-logo img {
-  width: 65px;
+  width: 80px;
 }
 
 .team-info, .team-score, .team-record, .match-time-lapsed, .match-score {
