@@ -28,7 +28,7 @@ body {
   font-size: 16px;
   color: white;
   text-shadow: -1px 1px 1px black;
-  top: 110px;
+  top: 68px;
   right: 40px;
   height: 20px;
   padding: 2px;
@@ -71,6 +71,13 @@ body {
 svg path[fill="#FF2D89"], polygon[fill="#FF2D89"] {
   fill: var(--main-color);
 }
+svg {
+  position: absolute;
+  height: 34px;
+  top: 35px;
+  right: 40px;
+  filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
+}
 
 #countdown-container {
   display: flex;
@@ -78,6 +85,7 @@ svg path[fill="#FF2D89"], polygon[fill="#FF2D89"] {
 }
 
 .centered-text {
+  visibility: hidden;
   text-align: center;
   word-spacing: 0;
   color: white;
