@@ -28,8 +28,8 @@ body {
   font-size: 16px;
   color: white;
   text-shadow: -1px 1px 1px black;
-  top: 68px;
-  right: 40px;
+  top: 100px;
+  right: 60px;
   height: 20px;
   padding: 2px;
 }
@@ -73,7 +73,7 @@ svg path[fill="#FF2D89"], polygon[fill="#FF2D89"] {
 }
 svg {
   position: absolute;
-  height: 34px;
+  height: 64px;
   top: 35px;
   right: 40px;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
