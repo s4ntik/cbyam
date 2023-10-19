@@ -17,19 +17,22 @@ body {
   bottom: 0;
   right: 36px;
 }
+.clock-container {
+  position: relative;
+}
 
 #date {
   color: white;
   top: 0px;
-  right: 150px;
+  right: 135px;
 }
 
 #json-data {
-  font-size: 16px;
+  font-size: 18px;
   color: white;
   text-shadow: -1px 1px 1px black;
-  top: 100px;
-  right: 60px;
+  top: 30px;
+  right: 40px;
   height: 20px;
   padding: 2px;
 }
@@ -37,7 +40,7 @@ body {
 #time {
   color: var(--main-color);
   top: 0px;
-  right: 32px;
+  right: 19px;
 }
 
 #countdown {
@@ -65,23 +68,32 @@ body {
 }
 
 #countdown-display {
+  position: relative;
+  word-spacing: 0.5rem;
+  font-size: 25px;
+  right: 92px;
+  bottom: 2px;
   color: white;
+  font-style: italic
 }
 
-svg path[fill="#FF2D89"], polygon[fill="#FF2D89"] {
-  fill: var(--main-color);
+svg path[fill="#f9c007"], polygon[fill="#f9c007"] {
+	fill: white;
 }
 svg {
   position: absolute;
-  height: 64px;
-  top: 35px;
-  right: 40px;
+  height: 50px;
+  bottom: 15px;
+  right: 0;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
 }
 
-#countdown-container {
+#countdown {
+  position: relative;
+  right: 92px;
   display: flex;
   align-items: center;
+  font-style: italic
 }
 
 .centered-text {
