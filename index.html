@@ -13,7 +13,14 @@
   </head>
   <body translate="no">
     <!-- Container for the image, date, and time -->
-    <div style="position: relative;">
+    <div class="clock-container">
+      <!-- Date -->
+      <div id="date" class="clock-output"></div>
+      <!-- Time -->
+      <div id="time" class="clock-output"></div>
+    </div>
+    <!-- Countdown Timer -->
+    <div id="countdown-container" class="clock-output">
       <!-- SVG Path -->
       <?xml version="1.0" encoding="UTF-8"?>
       <svg enable-background="new 0 0 475 240" version="1.1" viewBox="0 0 475 240" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
@@ -29,14 +36,7 @@
           <polygon points="449.6 95.6 411.1 239 363 239 382.1 167.9 335.4 218.9 334.5 218.9 315.3 167.9 296.2 239 249.3 239 287.8 95.6 335.1 95.6 352.4 146 396.6 95.6" fill="#fff" />
         </g>
       </svg>
-      <!-- Date -->
-      <div id="date" class="clock-output"></div>
-      <!-- Time -->
-      <div id="time" class="clock-output"></div>
-    </div>
-    <!-- Countdown Timer -->
-    <div id="countdown-container" class="clock-output">
-      <div id="countdown">Shift Ends in:</div>
+      <div id="countdown">Shift Ends in</div>
       <div id="countdown-display"></div>
     </div>
     <!-- JSON Data -->
