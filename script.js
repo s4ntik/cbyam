@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const createTeamDiv = function (team) {
         const teamDiv = $('<div class="team">');
         const teamLogoContainer = $(`<div class="team-logo" style="background-color: #${team.color}">`);
-        const teamLogo = $(`<img src="${team.logo}" alt="${team.displayName}">`);
+        const teamLogo = $(`<img src="${team.logoDark}" alt="${team.displayName}">`);
         const teamInfo = $('<div class="team-info">');
         const teamName = $(`<h2 class="team-name">${team.displayName}</h2>`);
         const teamRecord = $(`<p class="team-record">${team.record}</p>`);
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const timestamp = new Date().getTime();
             const url =
-                "https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=football&league=nfl&region=us&lang=en&contentorigin=espn×tamp=" +
+                "https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=football&league=college-football&region=us&lang=en&contentorigin=espn×tamp=" +
                 timestamp;
 
             $.ajax({
