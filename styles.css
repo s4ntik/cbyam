@@ -83,7 +83,7 @@ svg path[fill="#f9c007"], polygon[fill="#f9c007"] {
 }
 svg {
   position: absolute;
-  height: 50px;
+  height: 80px;
   bottom: 15px;
   right: 0;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
