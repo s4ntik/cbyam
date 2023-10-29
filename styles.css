@@ -94,6 +94,7 @@ svg {
   height: 150px;
   top: -20px;
   right: -20px;
+  filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
 }
 
 #countdown {
