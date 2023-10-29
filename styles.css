@@ -32,8 +32,8 @@ body {
   font-size: 18px;
   color: white;
   text-shadow: -1px 1px 1px black;
-  top: 32px;
-  right: 29px;
+  top: 30px;
+  right: 34px;
   height: 20px;
   padding: 2px;
 }
@@ -87,6 +87,13 @@ svg {
   bottom: 15px;
   right: 0;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
+}
+#spider-web {
+  z-index: -999;
+  position: absolute;
+  height: 150px;
+  top: -20px;
+  right: -20px;
 }
 
 #countdown {
