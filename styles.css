@@ -1,5 +1,5 @@
 :root {
-  --main-color: #f8731e;
+  --main-color: #ff2d89;
 }
 
 body {
@@ -81,19 +81,11 @@ body {
 svg path[fill="#f9c007"], polygon[fill="#f9c007"] {
 	fill: white;
 }
-svg {
+#logo {
   position: absolute;
-  height: 80px;
+  height: 50px;
   bottom: 15px;
   right: 0;
-  filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
-}
-#spider-web {
-  z-index: -999;
-  position: absolute;
-  height: 150px;
-  top: -20px;
-  right: -20px;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
 }
 
@@ -121,11 +113,18 @@ svg {
 .small-text {
   color: var(--main-color);
   font-size: 30px;
-  text-shadow: 0 1px 0 #c16637, 0 2px 0 #ab5b2f, 0 3px 0 #a05027,
-    0 4px 0 #99451f, 0 5px 0 #8e3a17, 0 6px 1px rgba(0, 0, 0, 0.1),
-    0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
-    0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25),
-    0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 0 #c4005c,
+               0 2px 0 #ad004e,
+               0 3px 0 #960041,
+               0 4px 0 #7f0033,
+               0 5px 0 #680026,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);
 }
 
 .big-text {
