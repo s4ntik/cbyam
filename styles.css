@@ -33,7 +33,7 @@ body {
   color: white;
   text-shadow: -1px 1px 1px black;
   top: 30px;
-  right: 28px;
+  right: 26px;
   height: 20px;
   padding: 2px;
 }
@@ -42,6 +42,19 @@ body {
   color: var(--main-color);
   top: 0px;
   right: 19px;
+}
+
+#countdown-container {
+  position: absolute;
+  bottom: 12px;
+  right: 130px;
+}
+
+#countdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-style: italic
 }
 
 #countdown {
@@ -57,14 +70,14 @@ body {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: move 210s linear infinite;
+  animation: move 45s linear infinite;
   text-shadow: none;
   filter: drop-shadow(-1px 1px 1px black);
 }
 
 @keyframes move {
   to {
-    background-position: 4500vh;
+    background-position: 500vh;
   }
 }
 
@@ -72,8 +85,6 @@ body {
   position: relative;
   word-spacing: 0.5rem;
   font-size: 25px;
-  right: 92px;
-  bottom: 2px;
   color: white;
   font-style: italic
 }
@@ -85,16 +96,8 @@ svg path[fill="#f9c007"], polygon[fill="#f9c007"] {
   position: absolute;
   height: 50px;
   bottom: 15px;
-  right: 0;
+  right: 28px;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
-}
-
-#countdown {
-  position: relative;
-  right: 92px;
-  display: flex;
-  align-items: center;
-  font-style: italic
 }
 
 .centered-text {
