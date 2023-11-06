@@ -46,14 +46,15 @@ body {
 
 #countdown-container {
   position: absolute;
-  bottom: 12px;
-  right: 130px;
+  bottom: 0;
+  right: 0
 }
 
 #countdown {
   position: relative;
   display: flex;
   align-items: center;
+  right: 120px;
   font-style: italic
 }
 
@@ -70,7 +71,7 @@ body {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: move 45s linear infinite;
+  animation: move 40s linear infinite;
   text-shadow: none;
   filter: drop-shadow(-1px 1px 1px black);
 }
@@ -85,6 +86,7 @@ body {
   position: relative;
   word-spacing: 0.5rem;
   font-size: 25px;
+    right: 120px;
   color: white;
   font-style: italic
 }
