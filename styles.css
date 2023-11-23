@@ -1,5 +1,5 @@
 :root {
-  --main-color: #ff2d89;
+  --main-color: #cc231e;
 }
 
 body {
@@ -47,7 +47,7 @@ body {
 #countdown-container {
   position: absolute;
   bottom: 0;
-  right: 0
+  right: 0;
 }
 
 #countdown {
@@ -55,7 +55,7 @@ body {
   display: flex;
   align-items: center;
   right: 120px;
-  font-style: italic
+  font-style: italic;
 }
 
 #countdown {
@@ -86,13 +86,14 @@ body {
   position: relative;
   word-spacing: 0.5rem;
   font-size: 25px;
-    right: 120px;
+  right: 120px;
   color: white;
-  font-style: italic
+  font-style: italic;
 }
 
-svg path[fill="#f9c007"], polygon[fill="#f9c007"] {
-	fill: white;
+svg path[fill="#f9c007"],
+polygon[fill="#f9c007"] {
+  fill: white;
 }
 #logo {
   position: absolute;
@@ -118,18 +119,11 @@ svg path[fill="#f9c007"], polygon[fill="#f9c007"] {
 .small-text {
   color: var(--main-color);
   font-size: 30px;
-  text-shadow: 0 1px 0 #c4005c,
-               0 2px 0 #ad004e,
-               0 3px 0 #960041,
-               0 4px 0 #7f0033,
-               0 5px 0 #680026,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+  text-shadow: 0 1px 0 #990026, 0 2px 0 #800021, 0 3px 0 #66001a,
+    0 4px 0 #4d0015, 0 5px 0 #33000f, 0 6px 1px rgba(0, 0, 0, 0.1),
+    0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
 }
 
 .big-text {
