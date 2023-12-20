@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const targetTimeToday = moment().set({
-        hour: 8,
+        hour: 16,
         minute: 0,
         second: 0,
         millisecond: 0,
