@@ -197,11 +197,49 @@ polygon[fill="#f9c007"] {
   }
 }
 
+#ribbon_left {
+  transform-origin: left bottom;
+  transform-box: fill-box;
+  animation: rotateL 3s linear infinite;
+}
+
+@keyframes rotateL {
+  from {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#ribbon_right {
+  transform-origin: right bottom;
+  transform-box: fill-box;
+  animation: rotateR 3s linear infinite;
+}
+
+@keyframes rotateR {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 #gift-box {
-  animation: rotate 3s ease-in-out infinite;
   width: 140px;
   margin-right: -140px;
-  /* Adjust this value to create space for the text container */
 }
 
 #gift-container {
