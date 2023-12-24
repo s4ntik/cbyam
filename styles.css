@@ -214,22 +214,22 @@ polygon[fill="#f9c007"] {
 
 @keyframes animateBackground {
   0% {
-    background-position: 0 77%; /* Initial position */
+    background-position: 0 55%; /* Initial position */
   }
   9% {
-    background-position: 0 77%; /* Initial position */
+    background-position: 0 55%; /* Initial position */
   }
   16% {
-    background-position: 0 55%; /* Initial position */
+    background-position: 0 77%; /* Initial position */
   }
   68% {
-    background-position: 0 55%; /* Initial position */
+    background-position: 0 77%; /* Initial position */
   }
   71% {
-    background-position: 0 77%; /* Initial position */
+    background-position: 0 55%; /* Initial position */
   }
   100% {
-    background-position: 0 77%; /* Initial position */
+    background-position: 0 55%; /* Initial position */
   }
 }
 
