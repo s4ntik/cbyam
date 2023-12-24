@@ -160,3 +160,69 @@ polygon[fill="#f9c007"] {
   font-weight: inherit;
   box-sizing: border-box;
 }
+
+#boxy,
+#lid_shadow,
+#box_wrap {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-30px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+#full_lid,
+#ribbons {
+  animation: float2 3s ease-in-out infinite;
+}
+
+@keyframes float2 {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-60px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+#gift-box {
+  animation: rotate 3s ease-in-out infinite;
+  width: 140px;
+  margin-right: -140px;
+  /* Adjust this value to create space for the text container */
+}
+
+#gift-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 15px;
+  left: 28px;
+
+#text-container {
+  color: white;
+  font-size: 15px;
+  border-radius: 6px;
+  padding: 6px;
+  margin-top: 90px;
+  max-height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #f7434c;
+}
+
