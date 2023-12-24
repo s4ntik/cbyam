@@ -1,5 +1,5 @@
 :root {
-  --main-color: #cc231e;
+  --main-color: red;
 }
 
 body {
@@ -56,9 +56,6 @@ body {
   align-items: center;
   right: 120px;
   font-style: italic;
-}
-
-#countdown {
   background-image: linear-gradient(
     to right,
     #9c4f96,
@@ -214,15 +211,38 @@ polygon[fill="#f9c007"] {
   bottom: 15px;
   left: 28px;
 }
+
+@keyframes animateBackground {
+  0% {
+    background-position: 0 77%; /* Initial position */
+  }
+  9% {
+    background-position: 0 77%; /* Initial position */
+  }
+  16% {
+    background-position: 0 55%; /* Initial position */
+  }
+  68% {
+    background-position: 0 55%; /* Initial position */
+  }
+  71% {
+    background-position: 0 77%; /* Initial position */
+  }
+  100% {
+    background-position: 0 77%; /* Initial position */
+  }
+}
+
 #text-container {
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 6px;
   padding: 6px;
   margin-top: 90px;
-  max-height: 50px;
+  max-height: 40px;
   display: flex;
   align-items: center;
-  background-color: #f7434c;
+  background-size: cover;
+  background-image: url("https://cdn.dribbble.com/users/256781/screenshots/2421811/media/5b524dadb3c5a5d9f44240ca884e247d.gif");
+  animation: animateBackground 6s ease-in-out infinite; /* Adjust the duration and timing function as needed */
 }
-
