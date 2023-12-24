@@ -214,7 +214,7 @@ polygon[fill="#f9c007"] {
   bottom: 15px;
   left: 28px;
 
-#text-container {
+.text-container {
   color: white;
   font-size: 15px;
   border-radius: 6px;
