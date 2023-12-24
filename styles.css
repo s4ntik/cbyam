@@ -243,6 +243,6 @@ polygon[fill="#f9c007"] {
   display: flex;
   align-items: center;
   background-size: cover;
-  background-image: url("https://cdn.dribbble.com/users/256781/screenshots/2421811/media/5b524dadb3c5a5d9f44240ca884e247d.gif");
+  background-image: url("cbyam/santa-sleigh.png");
   animation: animateBackground 6s ease-in-out infinite; /* Adjust the duration and timing function as needed */
 }
