@@ -244,5 +244,5 @@ polygon[fill="#f9c007"] {
   align-items: center;
   background-size: cover;
   background-image: url("santa-sleigh.png");
-  animation: animateBackground 6s ease-in-out infinite; /* Adjust the duration and timing function as needed */
+  animation: animateBackground 6s linear infinite; /* Adjust the duration and timing function as needed */
 }
