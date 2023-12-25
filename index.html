@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="styles-score.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@1,900&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
- </head>
- <body translate="no">
-  <!-- Container for the image, date, and time -->
-  <div class="clock-container">
-   <!-- Date -->
-   <div id="date" class="clock-output"></div>
-   <!-- Time -->
-   <div id="time" class="clock-output"></div>
-  </div>
-  <!-- Countdown Timer -->
-  <div id="countdown-container" class="clock-output">
-   <!-- SVG Path -->
-   <?xml version="1.0" encoding="utf-8"?>
-   <!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-   <svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 475 240" style="enable-background:new 0 0 475 240;" xml:space="preserve">
-    <g opacity="0.8">
-     <path style="fill:#FFFFFF;" d="M93.6,62.4c-1.6,8.3-6.3,14.7-14.1,19.1c-7.8,4.4-18.1,6.7-31,6.7c-12,0-20.7-1.8-26.2-5.4
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-score.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@1,900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  </head>
+  <body translate="no">
+    <!-- Container for the image, date, and time -->
+    <div class="clock-container">
+      <!-- Date -->
+      <div id="date" class="clock-output"></div>
+      <!-- Time -->
+      <div id="time" class="clock-output"></div>
+    </div>
+    <!-- Countdown Timer -->
+    <div id="countdown-container" class="clock-output">
+      <!-- SVG Path -->
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 475 240" style="enable-background:new 0 0 475 240;" xml:space="preserve">
+        <g opacity="0.8">
+          <path style="fill:#FFFFFF;" d="M93.6,62.4c-1.6,8.3-6.3,14.7-14.1,19.1c-7.8,4.4-18.1,6.7-31,6.7c-12,0-20.7-1.8-26.2-5.4
 		c-5.5-3.6-7.6-8.9-6.2-15.8c0.8-4.2,3-7.7,6.6-10.4c3.6-2.7,7.8-4.1,12.6-4.1c5.6,0,9.8,1.2,12.6,3.7c2.8,2.5,3.8,5.8,3,9.9
 		c-0.6,3.2-2.2,5.7-4.7,7.5c-2.5,1.8-5.7,2.8-9.7,3c-0.6,0.5-1,1-1.1,1.6c-0.1,0.6,0.1,1,0.5,1.4c0.5,0.3,1.1,0.5,2,0.5
 		c4.2,0,7.9-1.3,11.2-4c3.3-2.7,5.3-6,6.1-10c0.6-3.2,0.5-5.9-0.4-8c-0.9-2.1-2.7-4-5.3-5.7c-2.6-1.7-6.3-3.3-11.1-4.9
@@ -34,109 +33,113 @@
 		c-2.7-2.5-3.7-5.8-2.9-9.9c0.6-3.2,2.2-5.7,4.7-7.5c2.5-1.8,5.7-2.8,9.7-3c0.6-0.5,1-1,1.1-1.6c0.1-0.6-0.1-1-0.5-1.4
 		c-0.5-0.3-1.1-0.5-2-0.5c-2.7,0-5.2,0.6-7.6,1.8c-2.4,1.2-4.5,2.9-6.3,5c-1.7,2.1-2.9,4.5-3.4,7.2c-0.9,4.6-0.1,8.3,2.5,11
 		c2.5,2.8,7.3,5.2,14.4,7.3c6.5,1.9,11.1,4.6,13.7,8C93.8,52.8,94.6,57.1,93.6,62.4z" />
-    </g>
-    <g opacity="0.8">
-     <path style="fill:#FFFFFF;" d="M149.5,1c-28.1,0-49.3,23.2-49.3,49.2c0,21.4,17,38,41.7,38c28.1,0,49.3-23.2,49.3-49.2
+        </g>
+        <g opacity="0.8">
+          <path style="fill:#FFFFFF;" d="M149.5,1c-28.1,0-49.3,23.2-49.3,49.2c0,21.4,17,38,41.7,38c28.1,0,49.3-23.2,49.3-49.2
 		C191.1,17.5,174.1,1,149.5,1z M143.7,63.5c-10.1,0-15.4-6.9-15.4-15.8c0-10.5,7.5-22,19.3-22c10.1,0,15.4,6.9,15.4,15.8
 		C163,52,155.4,63.5,143.7,63.5z" />
-    </g>
-    <g opacity="0.8">
-     <path style="fill:#FFFFFF;" d="M205.5,2.7h28.1c15.4,0,24.9,3,31.1,9.2c4.4,4.4,6.6,10.3,6.6,16.9c0,21-15.8,35-42.4,35h-11.9
+        </g>
+        <g opacity="0.8">
+          <path style="fill:#FFFFFF;" d="M205.5,2.7h28.1c15.4,0,24.9,3,31.1,9.2c4.4,4.4,6.6,10.3,6.6,16.9c0,21-15.8,35-42.4,35h-11.9
 		L211,86.5h-28L205.5,2.7z M227.5,43.7c10.7,0,15.6-4.8,15.6-11.1c0-1.8-0.7-3.6-2-4.9c-1.9-1.9-5.3-2.6-8.4-2.6h-5.3l-4.9,18.7
 		H227.5z" />
-    </g>
-    <g opacity="0.8">
-     <path style="fill:#FFFFFF;" d="M281.5,2.7h28l-8,29.6h25.6l8-29.6h28l-22.5,83.8h-28l8-30.1h-25.6l-8,30.1h-28L281.5,2.7z" />
-    </g>
-    <g opacity="0.8">
-     <path style="fill:#FFFFFF;" d="M368.9,2.7h28l-22.5,83.8h-28L368.9,2.7z" />
-    </g>
-    <g opacity="0.8">
-     <polygon style="fill:#FFFFFF;" points="424,25.7 421.7,34.2 462.7,34.2 457.3,54.4 416.3,54.4 413.8,63.5 458.1,63.5 451.9,86.5 
+        </g>
+        <g opacity="0.8">
+          <path style="fill:#FFFFFF;" d="M281.5,2.7h28l-8,29.6h25.6l8-29.6h28l-22.5,83.8h-28l8-30.1h-25.6l-8,30.1h-28L281.5,2.7z" />
+        </g>
+        <g opacity="0.8">
+          <path style="fill:#FFFFFF;" d="M368.9,2.7h28l-22.5,83.8h-28L368.9,2.7z" />
+        </g>
+        <g opacity="0.8">
+          <polygon style="fill:#FFFFFF;" points="424,25.7 421.7,34.2 462.7,34.2 457.3,54.4 416.3,54.4 413.8,63.5 458.1,63.5 451.9,86.5 
 		380.2,86.5 402.7,2.7 474.4,2.7 468.2,25.7 	" />
-    </g>
-    <g opacity="0.8">
-     <path style="fill:#FFFFFF;" d="M129.6,99.6c-0.1,0.6-0.5,1.6-1,3c-2,4.9-7,14.4-14.8,28.4c-8,14.4-40.7,66.2-40.7,66.2L60.5,239
+        </g>
+        <g opacity="0.8">
+          <path style="fill:#FFFFFF;" d="M129.6,99.6c-0.1,0.6-0.5,1.6-1,3c-2,4.9-7,14.4-14.8,28.4c-8,14.4-40.7,66.2-40.7,66.2L60.5,239
 		H12.3L25,191.3l-15.5-80c-0.4-2.2-1.1-4-2.1-5.4c-0.8-1-1.9-2.2-3.4-3.3c-0.5-0.4-1.1-0.8-1.7-1.3c-1.1-0.8-1.6-1.6-1.4-2.5
 		l0.4-2.3c0.2-1.3,1.1-1.9,2.7-1.9h29.9c8.7,0,15,0.7,18.8,2c3.9,1.3,6.7,3.7,8.4,7c1.7,3.3,3,8.2,3.9,14.7l2.9,20.8l4.7,34.7
 		c0.5,0.6,1.2,1,2.1,1c1.9,0,3.1-1.1,3.5-3.2c0.2-1.3,0.1-3.4-0.3-6.3L73.4,132l-2.6-19.4c-0.7-5.1-1.5-8.4-2.5-10
 		c-0.9-1.4-1.4-2.3-1.7-2.8c-0.2-0.4-0.3-1-0.2-1.6l0.3-1.7c0.2-1.3,1.1-1.9,2.7-1.9h54.2C128.3,94.6,130.3,96.3,129.6,99.6z" />
-    </g>
-    <g opacity="0.8">
-     <polygon style="fill:#FFFFFF;" points="243.5,239 192.5,239 183.5,150.8 127.3,239 75.1,239 174.2,94.6 221.7,94.6 	" />
-    </g>
-    <g opacity="0.8">
-     <polygon style="fill:#FFFFFF;" points="449.6,95.6 411.1,239 363,239 382.1,167.9 335.4,218.9 334.5,218.9 315.3,167.9 296.2,239 
+        </g>
+        <g opacity="0.8">
+          <polygon style="fill:#FFFFFF;" points="243.5,239 192.5,239 183.5,150.8 127.3,239 75.1,239 174.2,94.6 221.7,94.6 	" />
+        </g>
+        <g opacity="0.8">
+          <polygon style="fill:#FFFFFF;" points="449.6,95.6 411.1,239 363,239 382.1,167.9 335.4,218.9 334.5,218.9 315.3,167.9 296.2,239 
 		249.3,239 287.8,95.6 335.1,95.6 352.4,146 396.6,95.6 	" />
-    </g>
-   </svg>
-   <div id="countdown">Shift Ends in</div>
-   <div id="countdown-display"></div>
-  </div>
-  <!-- JSON Data -->
-  <div id="json-data" class="clock-output"></div>
-  <!-- Centered Text with a Class -->
-  <div class="centered-text">
-   <span class="small-text">Don't go anywhere</span>
-   <br>
-   <span class="big-text"></span>
-  </div>
-  <!-- Football Match Section -->
-  <div class="container">
-   <div id="info-container"></div>
-   <div class="match">
-    <div class="match-content">
-     <div class="column" id="home-team-container"></div>
-     <div class="column" id="match-details">
-      <!-- Match details will be populated dynamically -->
-     </div>
-     <div class="column" id="away-team-container"></div>
+        </g>
+      </svg>
+      <div id="countdown">Shift Ends in</div>
+      <div id="countdown-display"></div>
     </div>
-   </div>
-  </div>
-  <!-- Gift Box Section -->
-  <div id="gift-container">
-   <?xml version="1.0" encoding="utf-8"?>
-   <!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-   <svg version="1.1" id="gift-box" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 683.5 555.7" style="enable-background:new 0 0 683.5 555.7;" xml:space="preserve">
-    <g id="box">
-     <path id="boxy" style="fill:#F7434C;" d="M483.4,437.1h-283c-3.3,0-6-2.7-6-6V265c0-3.3,2.7-6,6-6h283c3.3,0,6,2.7,6,6v166
-		C489.4,434.4,486.7,437.1,483.4,437.1z" />
-     <linearGradient id="box_wrap_00000165919750708565943800000016724306619468697270_" gradientUnits="userSpaceOnUse" x1="340.9895" y1="437.0981" x2="340.9895" y2="258.9894">
-      <stop offset="0" style="stop-color:#FF6C02" />
-      <stop offset="1" style="stop-color:#FFDB57" />
-     </linearGradient>
-     <path id="box_wrap" style="fill:url(#box_wrap_00000165919750708565943800000016724306619468697270_);" d="M367.9,437.1H314
-		c-3.4,0-6.2-2.8-6.2-6.2V265.2c0-3.4,2.8-6.2,6.2-6.2h53.9c3.4,0,6.2,2.8,6.2,6.2v165.8C374.1,434.3,371.4,437.1,367.9,437.1z" />
-     <path id="lid_shadow" style="opacity:0.2;fill:#890A19;" d="M489.4,286.6h-295V265c0-3.3,2.7-6,6-6h283c3.3,0,6,2.7,6,6V286.6z" />
-    </g>
-    <g id="ribbons">
-     <g id="ribbon_left">
-      <path style="fill:#FFDB57;" d="M439.7,118.6c-28.2,0-77.1,57.9-77.1,57.9v36.6c0,0,116.2,35.2,116.2-27
-			C478.9,164.9,459.4,118.6,439.7,118.6z" />
-      <path style="fill:#EF9324;" d="M459.7,159.1c-41.5,0-85.6,57-85.6,57S479,238.4,479,187.6C479,173.1,474.8,159.1,459.7,159.1z" />
-     </g>
-     <g id="ribbon_right">
-      <path style="fill:#FFDB57;" d="M243.7,118.6c28.2,0,77.1,57.9,77.1,57.9v36.6c0,0-116.2,35.2-116.2-27
-			C204.6,164.9,224,118.6,243.7,118.6z" />
-      <path style="fill:#EF9324;" d="M223.8,159.1c41.5,0,85.6,57,85.6,57s-104.9,22.3-104.9-28.5C204.5,173.1,208.6,159.1,223.8,159.1z
-			" />
-     </g>
-     <path id="ribbon_wrap_00000142152186152738263920000003783019377407949198_" style="fill:#F5BB3C;" d="M363.4,210.7h-44.1
-		c-3.3,0-6-2.7-6-6v-26.6c0-3.3,2.7-6,6-6h44.1c3.3,0,6,2.7,6,6v26.6C369.4,208,366.7,210.7,363.4,210.7z" />
-    </g>
-    <g id="full_lid">
-     <path id="lid" style="fill:#F7434C;" d="M506.4,268.9H177.2c-3.3,0-6-2.7-6-6v-51.7c0-3.3,2.7-6,6-6h329.2c3.3,0,6,2.7,6,6v51.7
-		C512.4,266.2,509.7,268.9,506.4,268.9z" />
-     <rect id="lid_wrap" x="300" y="205.3" style="fill:#FFDB57;" width="83" height="63.7" />
-    </g>
-   </svg>
-   <div id="text-container">
-    <h1><span> </span></h1> 
-   </div>
-  </div>
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="script.js"></script>
- </body>
+    <!-- JSON Data -->
+    <div id="json-data" class="clock-output"></div>
+    <!-- Centered Text with a Class -->
+    <div class="centered-text">
+      <span class="small-text">Don't go anywhere</span>
+      <br>
+      <span class="big-text"></span>
+    </div>
+    <!-- Football Match Section -->
+    <div class="container">
+      <div id="info-container"></div>
+      <div class="match">
+        <div class="match-content">
+          <div class="column" id="home-team-container"></div>
+          <div class="column" id="match-details">
+            <!-- Match details will be populated dynamically -->
+          </div>
+          <div class="column" id="away-team-container"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Gift Box Section -->
+    <div id="gift-container">
+      <!-- SVG content for the gift box -->
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg version="1.1" id="gift-box" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+        <g id="box">
+          <path id="boxy" style="fill:#F7434C;" d="M409.7,423.6H102.8c-3.6,0-6.5-2.9-6.5-6.5V237c0-3.6,2.9-6.5,6.5-6.5h306.9
+		c3.6,0,6.5,2.9,6.5,6.5v180C416.2,420.7,413.3,423.6,409.7,423.6z" />
+          <linearGradient id="box_wrap_00000157286871701911813370000006983070045602652560_" gradientUnits="userSpaceOnUse" x1="255.2282" y1="90.658" x2="255.2282" y2="283.7911" gradientTransform="matrix(1 0 0 -1 0 514.3)">
+            <stop offset="0" style="stop-color:#FF6C02" />
+            <stop offset="1" style="stop-color:#FFDB57" />
+          </linearGradient>
+          <path id="box_wrap" style="fill:url(#box_wrap_00000157286871701911813370000006983070045602652560_);" d="M284.5,423.6H226
+		c-3.7,0-6.7-3-6.7-6.7V237.2c0-3.7,3-6.7,6.7-6.7h58.4c3.7,0,6.7,3,6.7,6.7V417C291.2,420.6,288.2,423.6,284.5,423.6z" />
+          <path id="lid_shadow" style="opacity:0.2;fill:#890A19;enable-background:new    ;" d="M416.2,260.4H96.3V237
+		c0-3.6,2.9-6.5,6.5-6.5h306.9c3.6,0,6.5,2.9,6.5,6.5V260.4z" />
+        </g>
+        <g id="ribbons">
+          <g id="ribbon_left">
+            <path style="fill:#FFDB57;" d="M362.3,78.3c-30.6,0-83.6,62.8-83.6,62.8v39.7c0,0,126,38.2,126-29.3
+			C404.8,128.5,383.7,78.3,362.3,78.3z" />
+            <path style="fill:#EF9324;" d="M384,122.2c-45,0-92.8,61.8-92.8,61.8s113.8,24.2,113.8-30.9C404.9,137.4,400.4,122.2,384,122.2z" />
+          </g>
+          <g id="ribbon_right">
+            <path style="fill:#FFDB57;" d="M149.8,78.3c30.6,0,83.6,62.8,83.6,62.8v39.7c0,0-126,38.2-126-29.3
+			C107.4,128.5,128.4,78.3,149.8,78.3z" />
+            <path style="fill:#EF9324;" d="M128.2,122.2c45,0,92.8,61.8,92.8,61.8s-113.8,24.2-113.8-30.9
+			C107.3,137.4,111.7,122.2,128.2,122.2z" />
+          </g>
+          <path id="ribbon_wrap_00000142152186152738263920000003783019377407949198_" style="fill:#F5BB3C;" d="M279.6,178.1h-47.8
+		c-3.6,0-6.5-2.9-6.5-6.5v-28.8c0-3.6,2.9-6.5,6.5-6.5h47.8c3.6,0,6.5,2.9,6.5,6.5v28.8C286.1,175.2,283.2,178.1,279.6,178.1z" />
+        </g>
+        <g id="full_lid">
+          <path id="lid" style="fill:#F7434C;" d="M434.6,241.2h-357c-3.6,0-6.5-2.9-6.5-6.5v-56.1c0-3.6,2.9-6.5,6.5-6.5h357
+		c3.6,0,6.5,2.9,6.5,6.5v56.1C441.1,238.3,438.2,241.2,434.6,241.2z" />
+          <rect id="lid_wrap" x="210.8" y="172.3" style="fill:#FFDB57;" width="90" height="69.1" />
+        </g>
+      </svg>
+      <!-- Text container -->
+      <div id="text-container">
+        <h2>
+          <span></span>
+        </h2>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
