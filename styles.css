@@ -161,7 +161,7 @@ polygon[fill="#f9c007"] {
 #boxy,
 #lid_shadow,
 #box_wrap {
-  animation: float 3s ease-in-out infinite;
+  animation: float 2s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -180,7 +180,7 @@ polygon[fill="#f9c007"] {
 
 #full_lid,
 #ribbons {
-  animation: float2 3s ease-in-out infinite;
+  animation: float2 2s ease-in-out infinite;
 }
 
 @keyframes float2 {
@@ -200,7 +200,7 @@ polygon[fill="#f9c007"] {
 #ribbon_left {
   transform-origin: left bottom;
   transform-box: fill-box;
-  animation: rotateL 3s linear infinite;
+  animation: rotateL 2s linear infinite;
 }
 
 @keyframes rotateL {
@@ -220,7 +220,7 @@ polygon[fill="#f9c007"] {
 #ribbon_right {
   transform-origin: right bottom;
   transform-box: fill-box;
-  animation: rotateR 3s linear infinite;
+  animation: rotateR 2s linear infinite;
 }
 
 @keyframes rotateR {
