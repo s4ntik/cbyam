@@ -276,10 +276,10 @@ polygon[fill="#f9c007"] {
 }
 
 #gift-box {
-  left: 100px;
-  bottom: 15px;
+  left: 90px;
+  bottom: 12px;
   position: absolute;
-  width: 120px;
+  width: 110px;
 }
 
 #gift-container {
