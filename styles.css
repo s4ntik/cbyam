@@ -290,13 +290,13 @@ polygon[fill="#f9c007"] {
   left: 28px;
 }
 
-h1 {
+h2 {
   font-size: 18px;
   white-space: nowrap;
   color: white;
 }
 
-span::before {
+h2::before {
   content: "555";
   animation: animate 10s ease infinite;
   padding-left: 3px;
@@ -309,7 +309,7 @@ span::before {
     font-size: 15px;
   }
 
-  40% {
+  44% {
     content: "by Tipping";
     font-size: 22px;
     font-style: italic;
@@ -317,10 +317,11 @@ span::before {
 
   45% {
     content: "by Tipping";
-    font-size: 22px;
+    font-size: 27px;
     font-style: italic;
     color: white;
   }
+
   50% {
     content: "555 tokens";
     font-style: normal;
