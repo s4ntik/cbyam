@@ -273,28 +273,29 @@ polygon[fill="#f9c007"] {
 
 #text-container {
   border-radius: 6px;
-  padding: 6px;
+  padding: 0;
   margin-top: 90px;
   max-height: 40px;
   width: 270px;
+  overflow: hidden;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center; /* Center the content horizontally */
   background-size: cover;
-  background-image: url("santa-sleigh.png");
+  background-image: url("https://raw.githubusercontent.com/s4ntik/cbyam/main/santa-sleigh.png");
   animation: animBg 6s linear infinite;
 }
 
 h1 {
   font-size: 18px;
   white-space: nowrap;
-  overflow: hidden;
   color: white;
 }
 
 span::before {
   content: "555";
-  animation: animate 12s ease-in infinite;
+  animation: animate 10s ease infinite;
   padding-left: 3px;
 }
 
@@ -322,13 +323,13 @@ span::before {
 	font-style: italic;
   }
 
-  50% {
+  45% {
     content: "by Tipping";
 	font-size: 22px;
 	font-style: italic;
   }
 
-  100% {
+  55%, 100% {
     content: "555";
 	font-style: normal;
 	font-size: 30px;
