@@ -306,25 +306,25 @@ span::before {
     font-size: 15px;
   }
 
-  40% {
+  48% {
     content: "by Tipping";
     font-size: 22px;
     font-style: italic;
   }
 
-  45% {
+  53% {
     content: "by Tipping";
     font-size: 22px;
     font-style: italic;
     color: white;
   }
-  50% {
+  60% {
     content: "555 tokens";
     font-style: normal;
     font-size: 33px;
     color: #ffd700;
   }
-  55%,
+  65%,
   100% {
     content: "555 tokens";
     font-style: normal;
