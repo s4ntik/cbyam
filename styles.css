@@ -301,38 +301,34 @@ span::before {
 
 @keyframes animate {
   0% {
-    content: "WISH Sophie";
-	font-style: normal;
-    font-size: 22px;	
-  }
-  30% {
-    content: "a Merry Christmas";
-	font-style: normal;
-    font-size: 22px;	
-  }
-  
-  40% {
-    content: "Merry Christmas";
-	font-style: normal;
-	font-size: 18px;
+    content: "Wish Sophie a Merry Christmas";
+    font-style: normal;
+    font-size: 15px;
   }
 
   40% {
     content: "by Tipping";
-	font-size: 22px;
-	font-style: italic;
+    font-size: 22px;
+    font-style: italic;
   }
 
   45% {
     content: "by Tipping";
-	font-size: 22px;
-	font-style: italic;
+    font-size: 22px;
+    font-style: italic;
+    color: white;
   }
-
-  55%, 100% {
-    content: "555";
-	font-style: normal;
-	font-size: 30px;
-    color: #FFD700;
+  50% {
+    content: "555 tokens";
+    font-style: normal;
+    font-size: 33px;
+    color: #ffd700;
+  }
+  55%,
+  100% {
+    content: "555 tokens";
+    font-style: normal;
+    font-size: 28px;
+    color: #ffd700;
   }
 }
