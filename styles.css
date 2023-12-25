@@ -250,37 +250,88 @@ polygon[fill="#f9c007"] {
   left: 28px;
 }
 
-@keyframes animateBackground {
+@keyframes animBg {
   0% {
     background-position: 0 55%; /* Initial position */
   }
   9% {
-    background-position: 0 55%; /* Initial position */
+    background-position: 0 55%;
   }
   16% {
-    background-position: 0 77%; /* Initial position */
+    background-position: 0 77%;
   }
   68% {
-    background-position: 0 77%; /* Initial position */
+    background-position: 0 77%;
   }
   71% {
-    background-position: 0 55%; /* Initial position */
+    background-position: 0 55%;
   }
   100% {
-    background-position: 0 55%; /* Initial position */
+    background-position: 0 55%;
   }
 }
 
 #text-container {
-  color: white;
-  font-size: 18px;
   border-radius: 6px;
   padding: 6px;
   margin-top: 90px;
   max-height: 40px;
+  width: 270px;
   display: flex;
   align-items: center;
+  justify-content: center; /* Center the content horizontally */
   background-size: cover;
   background-image: url("santa-sleigh.png");
-  animation: animateBackground 6s linear infinite; /* Adjust the duration and timing function as needed */
+  animation: animBg 6s linear infinite;
+}
+
+h1 {
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
+}
+
+span::before {
+  content: "555";
+  animation: animate 12s ease-in infinite;
+  padding-left: 3px;
+}
+
+@keyframes animate {
+  0% {
+    content: "WISH Sophie";
+	font-style: normal;
+    font-size: 22px;	
+  }
+  30% {
+    content: "a Merry Christmas";
+	font-style: normal;
+    font-size: 22px;	
+  }
+  
+  40% {
+    content: "Merry Christmas";
+	font-style: normal;
+	font-size: 18px;
+  }
+
+  40% {
+    content: "by Tipping";
+	font-size: 22px;
+	font-style: italic;
+  }
+
+  50% {
+    content: "by Tipping";
+	font-size: 22px;
+	font-style: italic;
+  }
+
+  100% {
+    content: "555";
+	font-style: normal;
+	font-size: 30px;
+    color: #FFD700;
+  }
 }
