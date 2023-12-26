@@ -297,7 +297,7 @@ h2 {
 }
 
 h2::before {
-  content: "555";
+  content: "500";
   animation: animate 10s ease infinite;
   padding-left: 3px;
 }
@@ -323,14 +323,14 @@ h2::before {
   }
 
   50% {
-    content: "555 tokens";
+    content: "500 tokens";
     font-style: normal;
     font-size: 33px;
     color: #ffd700;
   }
   55%,
   100% {
-    content: "555 tokens";
+    content: "500 tokens";
     font-style: normal;
     font-size: 28px;
     color: #ffd700;
