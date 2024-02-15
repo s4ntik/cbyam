@@ -76,8 +76,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
 
 	const targetTimeToday = moment().set({
-		hour: 14,
-		minute: 28,
+		hour: 8,
+		minute: 0,
 		second: 0,
 		millisecond: 0
 	});
