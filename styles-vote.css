@@ -56,11 +56,11 @@ body {
 .superbowl {
   visibility: hidden;
   position: fixed;
-  bottom: 31px;
+  bottom: 20px;
   left: 43px;
-  height: 100px;
+  height: 90px;
   border-radius: 0 0 6px 6px;
-  background: linear-gradient(to bottom, rgba(65,87,206,0.0) 0%, rgba(65,87,206,0.2) 50%, rgba(65,87,206,0.5) 100%);
+  background: linear-gradient(to bottom, rgba(65,87,206,0.1) 0%, rgba(65,87,206,0.2) 30%, rgba(65,87,206,0.5) 100%);
 }
 
 .overlay {
@@ -81,7 +81,7 @@ body {
   width: 90%;
   text-align: center;
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 20px;
   text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black,
     -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black,
     0.05em 0.05em black, 0.12em 0.12em rgb(0 0 0 / 80%);

@@ -49,17 +49,17 @@ body {
   }
   25% {
     top: 30px;
-    left: 55px;
+    left: 48px;
     bottom: auto;
   }
   50% {
     top: auto;
-    bottom: 70px;
-    left: 55px;
+    bottom: 62px;
+    left: 48px;
     right: auto;
   }
   75% {
-    bottom: 70px;
+    bottom: 62px;
     right: 26px;
     top: auto;
     left: auto;
