@@ -7,7 +7,17 @@ let opacity = 1;
 let mirror = false;
 let resize = 1;
 
+let targetPosX = 0;
+let targetPosY = 0;
+let targetRotation = 0;
+
+const interpolationFactor = 0.2; // Adjust this value for smoother or faster movement
+
 function updateImageStyle() {
+  posX += (targetPosX - posX) * interpolationFactor;
+  posY += (targetPosY - posY) * interpolationFactor;
+  rotation += (targetRotation - rotation) * interpolationFactor;
+
   let transformValue = `translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
   if (mirror) {
     transformValue += ' scaleX(-1)';
@@ -30,13 +40,12 @@ socket.onmessage = function(event) {
     loadImage(data.src);
   }
   else if (data.type === 'position') {
-    posX = data.x;
-    posY = data.y;
-    rotation = data.rotation;
+    targetPosX = data.x;
+    targetPosY = data.y;
+    targetRotation = data.rotation;
     opacity = data.opacity;
     mirror = data.mirror;
     resize = data.resize;
-    updateImageStyle();
   }
 };
 
@@ -47,3 +56,10 @@ socket.onopen = function() {
 socket.onerror = function(error) {
   console.error('WebSocket error:', error);
 };
+
+function update() {
+  updateImageStyle();
+  requestAnimationFrame(update);
+}
+
+update();
