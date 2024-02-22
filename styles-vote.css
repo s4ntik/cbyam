@@ -43,14 +43,14 @@ body {
   width: 50%;
   border-radius: 5px 0 0 5px;
   left: 0;
-  background-color: #f5009b; /* Red */
+  background-color: #0E7A0D; /* Xbox */
 }
 
 .right-bar {
   width: 50%;
   border-radius: 0 5px 5px 0;
   right: 0;
-  background-color: #387aff; /* Green */
+  background-color: #003791; /* Sony */
 }
 
 .superbowl {
