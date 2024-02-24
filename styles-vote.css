@@ -43,14 +43,14 @@ body {
   width: 50%;
   border-radius: 5px 0 0 5px;
   left: 0;
-  background-color: #0E7A0D; /* Xbox */
+  background-color: #44af69; /* Yes */
 }
 
 .right-bar {
   width: 50%;
   border-radius: 0 5px 5px 0;
   right: 0;
-  background-color: #003791; /* Sony */
+  background-color: #f8333c; /* No */
 }
 
 .superbowl {
@@ -60,7 +60,6 @@ body {
   left: 43px;
   height: 90px;
   border-radius: 0 0 6px 6px;
-  background: linear-gradient(to bottom, rgba(65,87,206,0.1) 0%, rgba(65,87,206,0.2) 30%, rgba(65,87,206,0.5) 100%);
 }
 
 .overlay {
