@@ -43,14 +43,14 @@ body {
   width: 50%;
   border-radius: 5px 0 0 5px;
   left: 0;
-  background-color: #44af69; /* Yes */
+  background-color: #1e69ff; /* Yes */
 }
 
 .right-bar {
   width: 50%;
   border-radius: 0 5px 5px 0;
   right: 0;
-  background-color: #f8333c; /* No */
+  background-color: #e0008e; /* No */
 }
 
 .superbowl {

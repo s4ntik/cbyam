@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data && data.source && data.user && data.amount) {
                 // Update counters based on the amount
                 switch (data.amount) {
-                    case '11':
+                    case '8':
                         handleAmount(data.amount, 'left');
                         break;
-                    case '12':
+                    case '9':
                         handleAmount(data.amount, 'right');
                         break;
                     // Add more cases if needed
