@@ -43,14 +43,14 @@ body {
   width: 50%;
   border-radius: 5px 0 0 5px;
   left: 0;
-  background-color: #1e69ff; /* Yes */
+  background-color: #107C10; /* Red */
 }
 
 .right-bar {
   width: 50%;
   border-radius: 0 5px 5px 0;
   right: 0;
-  background-color: #e0008e; /* No */
+  background-color: #006fcd; /* Green */
 }
 
 .superbowl {
@@ -60,6 +60,7 @@ body {
   left: 43px;
   height: 90px;
   border-radius: 0 0 6px 6px;
+  background: linear-gradient(to bottom, rgba(65,87,206,0.0) 0%, rgba(65,87,206,0.2) 50%, rgba(65,87,206,0.5) 100%);
 }
 
 .overlay {
@@ -83,7 +84,7 @@ body {
   font-size: 20px;
   text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black,
     -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black,
-    0.05em 0.05em black, 0.12em 0.12em rgb(0 0 0 / 70%);
+    0.05em 0.05em black, 0.12em 0.12em rgb(0 0 0 / 80%);
   display: -webkit-box;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
@@ -113,7 +114,7 @@ body {
   -webkit-line-clamp: 2;
   text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black,
     -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black,
-    0.05em 0.05em black, 0.12em 0.12em rgb(0 0 0 / 70%);
+    0.05em 0.05em black, 0.12em 0.12em rgb(0 0 0 / 80%);
 }
 
 .outcome-left {
