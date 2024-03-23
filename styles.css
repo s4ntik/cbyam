@@ -9,6 +9,7 @@ body {
   font-weight: bold;
   text-shadow: -1px 1px 2px black;
   font-size: 25px;
+  margin-left: 110px;
 }
 
 .clock-output {
@@ -18,7 +19,7 @@ body {
   right: 36px;
 }
 .clock-container {
-  /* empty for now */
+  position: relative;
 }
 
 #date {
@@ -87,8 +88,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  right: -46px;
-  bottom: 29px;
+  right: 120px;
   font-style: italic;
   background-image: linear-gradient(
     to right,
@@ -141,7 +141,6 @@ polygon[fill="#f9c007"] {
   color: white;
   text-transform: uppercase;
   position: absolute;
-  display: block;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
