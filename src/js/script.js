@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const siteStatus = document.getElementById("json-data");
+        const lovense = document.getElementById("app");
         const brb = document.querySelector(".centered-text");
         const bigTextElement = document.querySelector(".big-text");
         const progressBar = document.querySelector(".progress-bar");
@@ -34,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             superbowl.style.visibility = data.gamemode === "true" ? "visible" : "hidden";
             superbowl.style.opacity = data.gamemode === "true" ? "1" : "0";
+
+            lovense.style.visibility = data.app === "true" ? "visible" : "hidden";
+            lovense.style.opacity = data.app === "true" ? "1" : "0";
 
             timer.style.visibility = data.timer === "true" ? "visible" : "hidden";
             timer.style.opacity = data.timer === "true" ? "1" : "0";
