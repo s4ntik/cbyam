@@ -1,0 +1,131 @@
+body {
+  color: white;
+}
+
+.progress-bar {
+  visibility: hidden;
+  position: absolute;
+  width: 300px;
+  height: 28px;
+  overflow: hidden;
+  bottom: 15px;
+  left: 43px;
+}
+
+.bar {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: width 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.bar-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bar-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: monospace;
+  text-shadow: -1px 1px 2px black;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 25px; /* Adjust font size as needed */
+}
+
+.left-bar {
+  width: 50%;
+  border-radius: 5px 0 0 5px;
+  left: 0;
+  background-color: #107C10; /* Red */
+}
+
+.right-bar {
+  width: 50%;
+  border-radius: 0 5px 5px 0;
+  right: 0;
+  background-color: #006fcd; /* Green */
+}
+
+.superbowl {
+  visibility: hidden;
+  position: fixed;
+  bottom: 20px;
+  left: 43px;
+  height: 90px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(to bottom, rgba(65,87,206,0.0) 0%, rgba(65,87,206,0.2) 50%, rgba(65,87,206,0.5) 100%);
+}
+
+.overlay {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border-radius: 8px;
+}
+
+.prediction-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prediction-title {
+  width: 90%;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black,
+    -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black,
+    0.05em 0.05em black, 0.12em 0.12em rgb(0 0 0 / 80%);
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.outcome-info-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.outcome-titles-row {
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 4px;
+}
+
+.outcome-title {
+  flex: 1;
+  align-self: flex-end;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black,
+    -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black,
+    0.05em 0.05em black, 0.12em 0.12em rgb(0 0 0 / 80%);
+}
+
+.outcome-left {
+  padding-left: 8px;
+}
+
+.outcome-title-gap {
+  width: 20px;
+}
+
+.outcome-right {
+  padding-right: 8px;
+  text-align: right;
+}

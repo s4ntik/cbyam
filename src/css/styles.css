@@ -1,0 +1,205 @@
+:root {
+  --main-color: #ff2d89;
+}
+
+body {
+  overflow: hidden;
+  font-family: monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  text-shadow: -1px 1px 2px black;
+  font-size: 25px;
+}
+
+.clock-output {
+  position: absolute;
+  padding: 10px;
+  bottom: 0;
+  right: 36px;
+}
+.clock-container {
+  /* empty for now */
+}
+
+#date {
+  color: white;
+  top: 0px;
+  right: 135px;
+}
+
+#json-data {
+  position: absolute; /* or 'fixed' depending on your layout needs */
+  font-size: 18px;
+  color: white;
+  text-shadow: -1px 1px 1px black;
+  top: 30px;
+  right: 26px;
+  height: 20px;
+  padding: 2px;
+  animation: data-dance 15s linear infinite;
+}
+
+@keyframes data-dance {
+  0% {
+    top: 30px;
+    right: 26px;
+    bottom: auto; /* Set to 'auto' to reset the bottom property */
+    left: auto; /* Set to 'auto' to reset the left property */
+  }
+  25% {
+    top: 30px;
+    left: 48px;
+    bottom: auto;
+  }
+  50% {
+    top: auto;
+    bottom: 62px;
+    left: 48px;
+    right: auto;
+  }
+  75% {
+    bottom: 62px;
+    right: 26px;
+    top: auto;
+    left: auto;
+  }
+  100% {
+    top: 30px;
+    right: 26px;
+    bottom: auto;
+    left: auto;
+  }
+}
+
+#time {
+  color: var(--main-color);
+  top: 0px;
+  right: 19px;
+}
+
+#countdown-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#countdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  right: -10px;
+  bottom: 35px;
+  font-style: italic;
+  background-image: linear-gradient(
+    to right,
+    #9c4f96,
+    #ff6355,
+    #fba949,
+    #fae442,
+    #8bd448,
+    #2aa8f2,
+    #9c4f96
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: move 55s linear infinite;
+  text-shadow: none;
+  filter: drop-shadow(-1px 1px 1px black);
+}
+
+@keyframes move {
+  to {
+    background-position: 500vh;
+  }
+}
+
+#countdown-display {
+  position: relative;
+  font-size: 25px;
+  right: 135px;
+  bottom: 5px;
+  color: white;
+  font-style: italic;
+}
+
+#logo {
+  position: absolute;
+  height: 60px;
+  bottom: 15px;
+  right: 20px;
+  filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.cls-1 {
+  fill: #fff;
+  opacity: 0.8;
+  stroke-width: 0px;
+} 
+.centered-text {
+  font-family: "Figtree", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Figtree", sans-serif;
+}
+
+.small-text {
+  color: var(--main-color);
+  font-size: 30px;
+  text-shadow: 0 1px 0 #e60073, 0 2px 0 #cc005e, 0 3px 0 #b3004a,
+    0 4px 0 #990033, 0 5px 0 #800026, 0 6px 1px rgba(0, 0, 0, 0.1),
+    0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+.big-text {
+  font-size: 65px;
+  animation: in 8s ease-out forwards infinite;
+  animation-delay: 1s;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+    0 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes in {
+  0% {
+    letter-spacing: 0px;
+  }
+  50% {
+    letter-spacing: 10px;
+  }
+  100% {
+    letter-spacing: 0px;
+  }
+}
+
+.coloris {
+  width: 150px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  box-sizing: border-box;
+}
+
+#moving-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg) scaleX(1);
+  cursor: move;
+  border: 1px solid transparent; /* Added for visual indication of selection */
+}
