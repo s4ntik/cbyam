@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const updateCountdown = function() {
         const now = new Date().getTime();
         const targetTimeToday = moment().set({
-            hour: 8,
+            hour: 18,
             minute: 0,
             second: 0,
             millisecond: 0
