@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const dateOutput = document.getElementById("date");
     const timeOutput = document.getElementById("time");
     const countdownDisplay = document.getElementById("countdown-display");
-    let countdownFinished = false;
+    const countdown = document.getElementById("countdown");
+    let countdownFinished = false;  // Flag to prevent further updates when countdown ends
 
     const updateJsonData = function(data) {
         if (!data) {
@@ -70,44 +71,59 @@ document.addEventListener("DOMContentLoaded", function() {
         timeOutput.innerText = now.format("HH:mm A");
     };
 
-    const updateCountdown = function() {
-        const now = new Date().getTime();
-        const targetTimeToday = moment().set({
-            hour: 18,
-            minute: 0,
+    const startCountdown = function(targetHour, targetMinute) {
+        const now = moment();
+        let targetTimeToday = moment().set({
+            hour: targetHour,
+            minute: targetMinute,
             second: 0,
             millisecond: 0
         });
 
-        if (moment().isAfter(targetTimeToday)) {
+        // If the target time has passed for today, set it for tomorrow
+        if (now.isAfter(targetTimeToday)) {
             targetTimeToday.add(1, "days");
         }
 
-        const targetEndTime = targetTimeToday.valueOf();
+        const countdownInterval = setInterval(() => {
+            const now = moment();
+            const timeDiff = targetTimeToday.diff(now);
 
-        if (now < targetEndTime) {
-            const timeDiff = targetEndTime - now;
-            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            if (timeDiff <= 0) {
+                // Countdown finished
+                clearInterval(countdownInterval);
+                countdown.innerText = "Stream is OVER!";
+                countdownDisplay.innerText = "Thanks to everyone for your Tips, See you next Time!";
+                countdownDisplay.style.color = "white";
+                countdownFinished = true;
+                return;
+            }
 
-            const hoursStr = hours.toString().padStart(2, "0");
-            const minutesStr = minutes.toString().padStart(2, "0");
-            const secondsStr = seconds.toString().padStart(2, "0");
+            // Update the countdown display with hours, minutes, and seconds
+            const duration = moment.duration(timeDiff);
+            const hours = Math.floor(duration.asHours()).toString().padStart(2, "0");
+            const minutes = duration.minutes().toString().padStart(2, "0");
+            const seconds = duration.seconds().toString().padStart(2, "0");
 
-            countdownDisplay.innerHTML = `${hoursStr}h ${minutesStr}m ${secondsStr}s`;
-        } else if (!countdownFinished) {
-            countdownDisplay.innerText = "Thanks to everyone for your Tips, See you next Time!";
-            countdownDisplay.style.color = "white";
-            countdownFinished = true;
-        }
+            countdownDisplay.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+        }, 1000);
     };
 
+    // Start all processes
+    updateClock();
     setInterval(updateClock, 1000);
-    setInterval(updateCountdown, 1000);
+
+    // Example: Countdown to 6 PM (18:00)
+    startCountdown(8, 0);
+
+    // Fetch JSON data every 950ms
     setInterval(fetchData, 950);
 
-    updateClock();
-    updateCountdown();
-    fetchData();
+    // Reset the container every 22 seconds using cloneNode(true)
+    function resetContainer() {
+        const elm = document.querySelector('.container');
+        const newone = elm.cloneNode(true);
+        elm.parentNode.replaceChild(newone, elm);
+    }
+    setInterval(resetContainer, 22000);
 });
