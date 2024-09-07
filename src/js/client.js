@@ -1,65 +1,143 @@
-const image = document.getElementById('moving-image');
+const imageContainer = document.getElementById('image-container');
+let images = {};
 
-let posX = 0;
-let posY = 0;
-let rotation = 0;
-let opacity = 1;
-let mirror = false;
-let resize = 1;
-
-let targetPosX = 0;
-let targetPosY = 0;
-let targetRotation = 0;
-
-const interpolationFactor = 0.2; // Adjust this value for smoother or faster movement
-
-function updateImageStyle() {
-  posX += (targetPosX - posX) * interpolationFactor;
-  posY += (targetPosY - posY) * interpolationFactor;
-  rotation += (targetRotation - rotation) * interpolationFactor;
-
-  let transformValue = `translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
-  if (mirror) {
-    transformValue += ' scaleX(-1)';
-  }
-  if (resize !== 1) {
-    transformValue += ` scale(${resize})`;
-  }
-  image.style.transform = transformValue;
-  image.style.opacity = opacity;
+// Function to update the style of an image
+function updateImageStyle(id, properties) {
+    const img = document.getElementById(id);
+    if (img) {
+        img.style.left = `${properties.x}px`;
+        img.style.top = `${properties.y}px`;
+        img.style.transform = `rotate(${properties.rotation}deg) ${properties.mirror ? 'scaleX(-1)' : ''} ${properties.resize !== 1 ? `scale(${properties.resize})` : ''}`;
+        img.style.opacity = properties.opacity;
+    }
 }
 
-function loadImage(url) {
-  image.src = url;
+// Function to load an image
+function loadImage(url, id) {
+    const img = document.getElementById(id);
+    if (img) {
+        img.src = url;
+    }
 }
 
+// Initialize WebSocket connection
 const socket = new WebSocket('wss://obsy.fly.dev/:3000');
+
 socket.onmessage = function(event) {
-  const data = JSON.parse(event.data);
-  if (data.type === 'image') {
-    loadImage(data.src);
-  }
-  else if (data.type === 'position') {
-    targetPosX = data.x;
-    targetPosY = data.y;
-    targetRotation = data.rotation;
-    opacity = data.opacity;
-    mirror = data.mirror;
-    resize = data.resize;
-  }
+    const data = JSON.parse(event.data);
+    if (data.type === 'images') {
+        // Clear existing images
+        imageContainer.innerHTML = '';
+        images = data.images;
+
+        // Add or update images
+        for (const [id, properties] of Object.entries(images)) {
+            let img = document.getElementById(id);
+            if (!img) {
+                img = document.createElement('img');
+                img.id = id;
+                img.style.position = 'absolute';
+                img.addEventListener('click', () => {
+                    // Handle image click for update
+                    selectImage(id);
+                });
+                imageContainer.appendChild(img);
+            }
+            img.src = properties.src;
+            updateImageStyle(id, properties);
+        }
+    }
 };
 
-socket.onopen = function() {
-  socket.send(JSON.stringify({ type: 'request_image' }));
-};
-
-socket.onerror = function(error) {
-  console.error('WebSocket error:', error);
-};
-
-function update() {
-  updateImageStyle();
-  requestAnimationFrame(update);
+function selectImage(id) {
+    const properties = images[id];
+    if (properties) {
+        // Update controls with selected image properties
+        document.getElementById('opacity').value = properties.opacity;
+        document.getElementById('opacity-input').value = properties.opacity;
+        document.getElementById('rotation').value = properties.rotation;
+        document.getElementById('rotation-input').value = properties.rotation;
+        document.getElementById('mirror').checked = properties.mirror;
+        document.getElementById('resize').value = properties.resize;
+    }
 }
 
-update();
+// Send updates to the server
+function sendUpdate(id, properties) {
+    const data = JSON.stringify({ type: 'update_image', id, properties });
+    socket.send(data);
+}
+
+// Event listeners for control elements
+document.getElementById('opacity').addEventListener('input', function() {
+    const id = Object.keys(images)[0]; // Assuming we have one selected
+    if (id) {
+        const opacity = this.value;
+        sendUpdate(id, { opacity });
+    }
+});
+
+document.getElementById('opacity-input').addEventListener('change', function() {
+    const id = Object.keys(images)[0];
+    if (id) {
+        const opacity = this.value;
+        document.getElementById('opacity').value = opacity;
+        sendUpdate(id, { opacity });
+    }
+});
+
+document.getElementById('rotation').addEventListener('input', function() {
+    const id = Object.keys(images)[0];
+    if (id) {
+        const rotation = this.value;
+        sendUpdate(id, { rotation });
+    }
+});
+
+document.getElementById('rotation-input').addEventListener('change', function() {
+    const id = Object.keys(images)[0];
+    if (id) {
+        const rotation = this.value;
+        document.getElementById('rotation').value = rotation;
+        sendUpdate(id, { rotation });
+    }
+});
+
+document.getElementById('mirror').addEventListener('change', function() {
+    const id = Object.keys(images)[0];
+    if (id) {
+        const mirror = this.checked;
+        sendUpdate(id, { mirror });
+    }
+});
+
+document.getElementById('resize').addEventListener('input', function() {
+    const id = Object.keys(images)[0];
+    if (id) {
+        const resize = this.value;
+        sendUpdate(id, { resize });
+    }
+});
+
+document.getElementById('add-image').addEventListener('click', () => {
+    const url = document.getElementById('image-url').value;
+    const data = JSON.stringify({
+        type: 'add_image',
+        src: url,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        opacity: 1,
+        mirror: false,
+        resize: 1
+    });
+    socket.send(data);
+});
+
+document.getElementById('delete-image').addEventListener('click', () => {
+    const id = Object.keys(images)[0];
+    if (id) {
+        const data = JSON.stringify({ type: 'delete_image', id });
+        socket.send(data);
+    }
+});
