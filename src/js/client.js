@@ -36,7 +36,7 @@ socket.onmessage = function(event) {
             if (!img) {
                 img = document.createElement('img');
                 img.id = id;
-                img.style.position = 'absolute';
+                img.style.position = 'fixed';
                 img.addEventListener('click', () => {
                     // Handle image click for update
                     selectImage(id);
