@@ -22,6 +22,10 @@ div {
   border: 0;
 }
 
+:root {
+  --app-color: #e7bd8d;
+}
+
 /*body的设置*/
 body {
   color: #333;
@@ -158,7 +162,7 @@ div {
 }
 
 .font-r {
-  color: #ff2d89;
+  color: var(--app-color);;
 }
 
 .transparent-bg {
@@ -4925,7 +4929,7 @@ div[data-v-4a772590] {
 
 .game-roll-dice .luck-num {
   /* Lucky Number */
-  color: #ff2d89;
+  color: var(--app-color);;
   font-size: 14px;
   padding: 10px 0 20px;
   -webkit-box-pack: center;
@@ -5119,7 +5123,7 @@ div[data-v-4a772590] {
   /* Tip received animation - circle style */
   width: 36px;
   height: 36px;
-  border: 2px solid #ff2d89;
+  border: 2px solid var(--app-color);;
   border-radius: 20px;
   position: absolute;
   clip: rect(0px, 20px, 40px, 0px);
@@ -5233,7 +5237,7 @@ div[data-anim~="base"] {
 .queue-to-control .queue-title {
   /* Title */
   font-size: 14px;
-  color: #ff2d89;
+  color: var(--app-color);;
 }
 
 .queue-to-control .user-waiting {
@@ -5449,14 +5453,14 @@ tbody td .toy-icon+.toy-icon[data-v-145abcf8] {
 
 .tip-setting-normal table .setting-item .control-time {
   /* Second row text */
-  color: #ff2d89;
+  color: var(--app-color);;
   width: 50px;
   text-shadow: 1.3px 1.3px 1.3px rgba(13, 17, 18, 0.8);
 }
 
 .tip-setting-normal table .setting-item .td-prize {
   /* Prize text */
-  color: #ff2d89;
+  color: var(--app-color);;
   text-align: center;
 }
 
@@ -5591,7 +5595,7 @@ tbody td .toy-icon+.toy-icon[data-v-145abcf8] {
 .tip-setting-special table .setting-item .control-time {
   /* Second column - time */
   font-size: 15px;
-  color: #ff2d89;
+  color: var(--app-color);;
   font-weight: 700;
   text-shadow: 1.3px 1.3px 1.3px rgba(13, 17, 18, 0.8);
 }
@@ -5639,7 +5643,7 @@ tbody td .toy-icon+.toy-icon[data-v-145abcf8] {
 .tip-setting-special table .setting-item .td-last-img {
   text-shadow: 1.3px 1.3px 1.3px rgba(13, 17, 18, 0.8);
   font-size: 14px;
-  color: #ff2d89;
+  color: var(--app-color);;
   white-space: nowrap;
 }
 
@@ -5775,7 +5779,7 @@ tbody td .toy-icon+.toy-icon[data-v-145abcf8] {
 .vibe-mate-title {
   width: 150px;
   font-weight: 900;
-  color: #ff2d89;
+  color: var(--app-color);;
   line-height: 20px;
   font-size: 14px;
   text-shadow: 1.3px 1.3px 1.3px rgba(13, 17, 18, 0.8);
@@ -6023,7 +6027,7 @@ tbody td .toy-icon+.toy-icon[data-v-145abcf8] {
   -ms-flex-align: center;
   align-items: center;
   font-size: 14px;
-  color: #ff2d89;
+  color: var(--app-color);;
   white-space: nowrap;
 }
 
@@ -6189,7 +6193,7 @@ tbody td .toy-icon+.toy-icon[data-v-145abcf8] {
   box-sizing: border-box;
   border-radius: 100% 100%;
   padding: 8px;
-  background-color: #ff2d89;
+  background-color: var(--app-color);;
   -webkit-transition: 1s all;
   transition: 1s all;
 }
@@ -6324,7 +6328,7 @@ tbody td .toy-icon+.toy-icon[data-v-145abcf8] {
   /* Tip received animation - prize description */
   font-size: 13px;
   margin: 15px 0 20px;
-  color: #ff2d89;
+  color: var(--app-color);;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
