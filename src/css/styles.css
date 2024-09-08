@@ -1,5 +1,5 @@
 :root {
-  --main-color: #ff2d89;
+  --main-color: #e7bd8d;
 }
 
 body {
@@ -152,8 +152,8 @@ body {
 .small-text {
   color: var(--main-color);
   font-size: 30px;
-  text-shadow: 0 1px 0 #e60073, 0 2px 0 #cc005e, 0 3px 0 #b3004a,
-    0 4px 0 #990033, 0 5px 0 #800026, 0 6px 1px rgba(0, 0, 0, 0.1),
+  text-shadow: 0 1px 0 #D0AA7F, 0 2px 0 #B99771, 0 3px 0 #A28463,
+    0 4px 0 #8B7155, 0 5px 0 #745F47, 0 6px 1px rgba(0, 0, 0, 0.1),
     0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
     0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
