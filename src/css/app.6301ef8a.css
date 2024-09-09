@@ -25,7 +25,7 @@ div {
 :root {
   --app-color: #e7bd8d;
   --app-color2: #ecac62;
-  --img-filter: filter: contrast(80%) brightness(200%) saturate(200%) sepia(13%) grayscale(9%) hue-rotate(110deg);
+  --img-filter: contrast(80%) brightness(200%) saturate(200%) sepia(13%) grayscale(9%) hue-rotate(110deg);
 }
 
 /*body的设置*/
