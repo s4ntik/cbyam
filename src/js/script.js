@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const progressBar = document.querySelector(".progress-bar");
         const superbowl = document.querySelector(".superbowl");
         const timer = document.querySelector(".timer");
+		const election = document.querySelector(".dv-graphic__visual");
 
         try {
             bigTextElement.innerHTML = replaceEmojiShortcodesWithImage(data["big-text"]);
@@ -36,6 +37,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             superbowl.style.visibility = data.gamemode === "true" ? "visible" : "hidden";
             superbowl.style.opacity = data.gamemode === "true" ? "1" : "0";
+			
+			election.style.visibility = data.election === "true" ? "visible" : "hidden";
+            election.style.opacity = data.election === "true" ? "1" : "0";
 
             lovense.style.visibility = data.app === "true" ? "visible" : "hidden";
             lovense.style.opacity = data.app === "true" ? "1" : "0";

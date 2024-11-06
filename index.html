@@ -9,6 +9,7 @@
   <link rel="shortcut icon" href="./favicon.ico">
   <link rel="stylesheet" href="./src/css/app.6301ef8a.css">
   <link rel="stylesheet" href="./src/css/styles.css">
+  <link rel="stylesheet" href="./src/css/style-election.css">
   <link rel="stylesheet" href="./src/css/styles-vote.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,9 +102,47 @@
       </div>
     </div>
   </div>
+  <!-- Election -->
+    <div class="dv-graphic__visual" aria-label="chart" aria-hidden="true">
+    <div class="dv-opposing-bars svelte-fsk5ll">
+      <!-- Harris side -->
+      <div class="headshot left svelte-fsk5ll" style="--color: #2986AB;">
+        <img src="https://graphics.axios.com/assets/headshots/pres-candidates-2024/kamala-harris-bw.png" alt="Kamala Harris">
+      </div>
+      
+      <!-- Progress bars with label in the middle -->
+      <ol data-middle-label="270 to win" class="svelte-fsk5ll">
+        <li class="side left svelte-fsk5ll noValue" style="--width: 0%; --color: #2986AB; --colorText: #2986AB; --inlineWidth: 0%;">
+          <div class="label label-top svelte-fsk5ll">
+            <div class="label-top__num svelte-fsk5ll" id="harris-electoral">0</div>
+            <div class="label-top__text svelte-fsk5ll">Harris</div>
+          </div>
+          <div class="label label-bottom svelte-fsk5ll">
+            <span id="harris-votes">0 votes (0%)</span>
+          </div>
+        </li>
+        
+        <li class="side right svelte-fsk5ll noValue" style="--width: 0%; --color: #FF6056; --colorText: #FF6056; --inlineWidth: 0%;">
+          <div class="label label-top svelte-fsk5ll">
+            <div class="label-top__num svelte-fsk5ll" id="trump-electoral">0</div>
+            <div class="label-top__text svelte-fsk5ll">Trump</div>
+          </div>
+          <div class="label label-bottom svelte-fsk5ll">
+            <span id="trump-votes">0 votes (0%)</span>
+          </div>
+        </li>
+      </ol>
+      
+      <!-- Trump side -->
+      <div class="headshot right svelte-fsk5ll" style="--color: #FF6056;">
+        <img src="https://graphics.axios.com/assets/headshots/pres-candidates-2024/donald-trump-bw.png" alt="Donald Trump">
+      </div>
+    </div>
+  </div>
   <!-- Scripts -->
   <script src="./src/js/client.js"></script>
   <script src="./src/js/script.js"></script>
+  <script src="./src/js/script-election.js"></script>
   <script src="./src/js/emoteLibrary.js"></script>
   <script src="./src/js/tips-data.js"></script>
   <script src="./src/js/lovense-app.min.js"></script>
