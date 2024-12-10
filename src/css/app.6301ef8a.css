@@ -23,8 +23,8 @@ div {
 }
 
 :root {
-  --app-color: #e7bd8d;
-  --app-color2: #ecac62;
+  --app-color: #E62C31;
+  --app-color2: #39693B;
   --img-filter: contrast(80%) brightness(200%) saturate(200%) sepia(13%) grayscale(9%) hue-rotate(110deg);
 }
 
