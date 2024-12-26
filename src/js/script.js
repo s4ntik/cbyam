@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	setInterval(updateClock, 1000);
 
 	// Example: Countdown to 6 PM (18:00)
-	startCountdown(2024, 12, 27, 5, 30);
+	startCountdown(2024, 12, 26, 5, 30);
 
 	// Fetch JSON data every 950ms
 	setInterval(fetchData, 950);
