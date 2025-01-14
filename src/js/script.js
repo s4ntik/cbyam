@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			const minutes = duration.minutes().toString().padStart(2, "0");
 			const seconds = duration.seconds().toString().padStart(2, "0");
 
-			countdownDisplay.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+			countdownDisplay.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
 		}, 1000);
 	};
 
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	setInterval(updateClock, 1000);
 
 	// Example: Countdown to 6 PM (18:00)
-	startCountdown(2024, 12, 27, 5, 30);
+	startCountdown(2025, 1, 15, 5, 30);
 
 	// Fetch JSON data every 950ms
 	setInterval(fetchData, 950);

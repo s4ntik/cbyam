@@ -1,5 +1,5 @@
 :root {
-  --main-color: #E62C31;
+  --main-color: #ff2d89;
 }
 
 body {
@@ -85,7 +85,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  right: -65px;
+  right: -10px;
   bottom: 35px;
   font-style: italic;
   background-image: linear-gradient(
@@ -122,9 +122,9 @@ body {
 
 #logo {
   position: absolute;
-  height: 65px;
-  bottom: 16px;
-  right: 22px;
+  height: 60px;
+  bottom: 15px;
+  right: 20px;
   opacity: 0.8;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
 }
