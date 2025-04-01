@@ -173,27 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
     elm.innerHTML = elm.innerHTML; // Avoids flickering
   }
 
-  function limitTextWidth() {
-    const textElement = document.querySelector(".big-text");
-    if (!textElement) return;
-  
-    let maxWidth = 900;
-    let currentWidth = textElement.offsetWidth;
-    let originalFontSize = 65; // Set this to match your max font size
-  
-    if (currentWidth > maxWidth) {
-      let newFontSize = originalFontSize * (maxWidth / currentWidth);
-      textElement.style.fontSize = `${newFontSize}px`;
-    } else {
-      textElement.style.fontSize = ""; // Reset to default size
-    }
-  
-    requestAnimationFrame(limitTextWidth); // Smooth animation loop
-  }
-
   // Initialize
   updateClock();
-  setInterval(limitTextWidth, 100);
   setInterval(updateClock, 1000);
   fetchData();
   setInterval(resetContainer, 22000);

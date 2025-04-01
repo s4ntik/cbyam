@@ -228,14 +228,18 @@ body {
 @keyframes in {
   0% {
     letter-spacing: 0px;
+    font-size: clamp(32px, 5vw, 65px);
   }
   50% {
     letter-spacing: 10px;
+    font-size: calc(65px - (10px * 0.5));
   }
   100% {
     letter-spacing: 0px;
+    font-size: clamp(32px, 5vw, 65px);
   }
 }
+
 
 .coloris {
   width: 150px;
