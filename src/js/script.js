@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const brb = document.querySelector(".brb-class");
     const end = document.querySelector(".ending-class");
     const bigTextElement = document.querySelector(".big-text");
+    const smallText2Element = document.querySelector(".small-text2");
     const progressBar = document.querySelector(".progress-bar");
     const superbowl = document.querySelector(".superbowl");
     const timer = document.querySelector(".timer");
@@ -27,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
       bigTextElement.innerHTML = replaceEmojiShortcodesWithImage(
         data["big-text"]
       );
+
+      smallText2Element.innerHTML = replaceEmojiShortcodesWithImage(data["small-text2"]);
 
       const username = data.username;
       const site =

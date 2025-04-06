@@ -174,7 +174,7 @@ body {
   font-family: "Figtree", sans-serif;
 }
 
-.small-text {
+.small-text, .small-text2 {
   color: var(--main-color);
   font-size: 30px;
   text-shadow: 0 1px 0 #e60073, 0 2px 0 #cc005e, 0 3px 0 #b3004a,
