@@ -3709,7 +3709,8 @@ div[data-v-235b9d23] {
     font-size: 22px;
     color: #fff32d;
     line-height: 30px;
-    text-shadow: 2px 2px 0 #f744af, 1px 2px 0 #f744af, -1px -2px 0 #f744af, -1px -1px 0 #f744af;
+    text-shadow: 2px 2px 0 #f744af, 1px 2px 0 #f744af, -1px -2px 0 #f744af,
+ -1px -1px 0 #f744af;
 }
 .chat-box-message .marquee[data-v-235b9d23] {
     display: inline-block;
