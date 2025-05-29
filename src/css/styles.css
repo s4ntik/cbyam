@@ -12,16 +12,30 @@ body {
   margin: 0;
 }
 .clock-output {
+  position: relative;
+  padding: 5px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.clock-container {
   position: absolute;
-  padding: 10px;
-  bottom: 0;
-  right: 36px;
+  top: 10px;
+  right: 30px;
+  display: flex;
+  flex-direction: row; /* Align elements side-by-side */
+  align-items: center; /* Vertically align items */
+  justify-content: space-between; /* Add spacing between elements */
+  gap: 15px; /* Increase spacing between #date and #time */
 }
 
 #date {
   color: white;
-  top: 0px;
-  right: 135px;
+  font-size: 25px; /* Ensure consistent font size */
+  text-shadow: -1px 1px 1px black;
+  padding: 5px; /* Add padding for better appearance */
+  box-sizing: border-box; /* Ensure padding doesn't affect dimensions */
+  transform: none; /* Remove unnecessary transform adjustments */
 }
 
 #json-data {
@@ -29,49 +43,15 @@ body {
   font-size: 18px;
   color: white;
   text-shadow: -1px 1px 1px black;
-  top: 30px;
-  right: 26px;
   height: 20px;
   padding: 2px;
-  animation: data-dance 15s linear infinite;
-}
-
-@keyframes data-dance {
-  0% {
-    top: 30px;
-    right: 26px;
-    bottom: auto; /* Set to 'auto' to reset the bottom property */
-    left: auto; /* Set to 'auto' to reset the left property */
-  }
-  25% {
-    top: 30px;
-    left: 48px;
-    bottom: auto;
-  }
-  50% {
-    top: auto;
-    bottom: 62px;
-    left: 48px;
-    right: auto;
-  }
-  75% {
-    bottom: 62px;
-    right: 26px;
-    top: auto;
-    left: auto;
-  }
-  100% {
-    top: 30px;
-    right: 26px;
-    bottom: auto;
-    left: auto;
-  }
+  top: 0; /* Ensure it starts within the viewport */
+  left: 0; /* Ensure it starts within the viewport */
 }
 
 #time {
   color: var(--main-color);
-  top: 0px;
-  right: 19px;
+  font-size: 25px; /* Ensure consistent font size */
 }
 
 #countdown-container {

@@ -6,7 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let countdownFinished = false;
   let countdownInterval = null; // Store interval reference to clear it if needed
 
-  const parseBoolean = (value) => value === "true";
+  const parseBoolean = (value) => {
+    return ["true", "1", "yes"].includes(String(value).toLowerCase());
+  };
 
   const updateJsonData = function (data) {
     if (!data) {
@@ -77,6 +79,14 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       timer.classList.add(parseBoolean(data.timer) ? "slide-out" : "slide-in");
 
+      // Apply user-defined opacity and font size to #json-data
+      if (data["user-opacity"]) {
+        siteStatus.style.opacity = data["user-opacity"];
+      }
+      if (data["user-size"]) {
+        siteStatus.style.fontSize = data["user-size"];
+      }
+
       // Start countdown if data includes countdown time
       if (data.countdown) {
         const { year, month, day, hour, minute } = data.countdown;
@@ -100,21 +110,31 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Error fetching JSON data:", error);
     }
 
-    setTimeout(fetchData, 950); // Prevents multiple overlapping calls
+    setTimeout(fetchData, 1000); // Slightly increase delay for better debouncing
   }
 
   function updateClock() {
+    if (!dateOutput || !timeOutput) {
+      console.error("Missing date or time output elements.");
+      return;
+    }
+
     const now = new Date();
     dateOutput.innerText = now.toLocaleDateString("en-US", {
       month: "short",
       day: "2-digit",
       year: "numeric",
     });
-    timeOutput.innerText = now.toLocaleTimeString("en-US", {
+
+    const timeString = now.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
     });
+    const [hours, minutesAndPeriod] = timeString.split(":");
+    const [minutes, period] = minutesAndPeriod.split(" ");
+
+    timeOutput.innerHTML = `<span class="hour">${hours.trim()}</span>:<span class="minutes">${minutes.trim()}</span>&nbsp;<span class="period">${period.trim()}</span>`;
   }
 
   function startCountdown(
@@ -176,9 +196,42 @@ document.addEventListener("DOMContentLoaded", function () {
     elm.innerHTML = elm.innerHTML; // Avoids flickering
   }
 
+  function bounceJsonData() {
+    const jsonData = document.getElementById("json-data");
+    if (!jsonData) {
+      console.error("Element #json-data not found.");
+      return;
+    }
+
+    let x = 0, y = 0;
+    let xDirection = 1, yDirection = 1;
+    const speed = 2; // Adjust speed as needed
+
+    function move() {
+      const parentWidth = window.innerWidth;
+      const parentHeight = window.innerHeight;
+
+      x += xDirection * speed;
+      y += yDirection * speed;
+
+      if (x <= 0 || x + jsonData.offsetWidth >= parentWidth) {
+        xDirection *= -1;
+      }
+      if (y <= 0 || y + jsonData.offsetHeight >= parentHeight) {
+        yDirection *= -1;
+      }
+
+      jsonData.style.transform = `translate(${x}px, ${y}px)`;
+      requestAnimationFrame(move);
+    }
+
+    move();
+  }
+
   // Initialize
   updateClock();
   setInterval(updateClock, 1000);
   fetchData();
   setInterval(resetContainer, 22000);
+  bounceJsonData();
 });
