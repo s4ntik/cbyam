@@ -97,30 +97,73 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
   
-async function fetchData() {
-  const tebiUrl = "https://s3.tebi.io/baka-json/data.json?t=" + Date.now();
-  
-  try {
-    const response = await fetch(tebiUrl, {
-      mode: 'cors', // Explicitly enable CORS
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      cache: 'no-store' // Prevent caching issues
-    });
+  // Tebi.io configuration
+  const JSON_URL = "https://s3.tebi.io/baka-json/data.json";
+  let currentData = null; // Cache the last fetched data
+  let retryCount = 0;
+  const MAX_RETRIES = 3;
+
+  // Modified fetchData with CORS handling and retries
+  async function fetchData() {
+    const timestamp = Date.now();
+    const cacheBusterUrl = `${JSON_URL}?t=${timestamp}`;
     
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    
-    const data = await response.json();
-    updateJsonData(data);
-  } catch (error) {
-    console.error("Fetch error:", error);
-    // Optional: Implement retry logic here
+    try {
+      // First try direct fetch
+      const response = await fetch(cacheBusterUrl, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-store',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (JSON.stringify(data) !== JSON.stringify(currentData)) {
+          currentData = data;
+          updateJsonData(data);
+        }
+        retryCount = 0; // Reset retry counter on success
+        return;
+      }
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } catch (error) {
+      console.warn("Direct fetch failed, trying proxy fallback:", error);
+      if (retryCount < MAX_RETRIES) {
+        retryCount++;
+        await tryProxyFallback();
+      } else {
+        console.error("Max retries reached, will try again later");
+        retryCount = 0;
+      }
+    } finally {
+      setTimeout(fetchData, 1000); // Continue polling
+    }
   }
-  
-  setTimeout(fetchData, 1000); // Continue polling
-}
+
+  // Proxy fallback implementation
+  async function tryProxyFallback() {
+    try {
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(JSON_URL)}`;
+      const response = await fetch(proxyUrl);
+      
+      if (response.ok) {
+        const result = await response.json();
+        if (result.contents) {
+          const data = JSON.parse(result.contents);
+          if (JSON.stringify(data) !== JSON.stringify(currentData)) {
+            currentData = data;
+            updateJsonData(data);
+          }
+        }
+      }
+    } catch (proxyError) {
+      console.error("Proxy fallback failed:", proxyError);
+    }
+  }
 
   function updateClock() {
     if (!dateOutput || !timeOutput) {
@@ -237,10 +280,22 @@ async function fetchData() {
     move();
   }
 
-  // Initialize
-  updateClock();
-  setInterval(updateClock, 1000);
-  fetchData();
-  setInterval(resetContainer, 22000);
-  bounceJsonData();
+
+  // Initialize with error handling
+  function initialize() {
+    try {
+      updateClock();
+      setInterval(updateClock, 1000);
+      fetchData(); // Start data fetching
+      setInterval(resetContainer, 22000);
+      bounceJsonData();
+    } catch (initError) {
+      console.error("Initialization error:", initError);
+      // Attempt recovery after delay
+      setTimeout(initialize, 2000);
+    }
+  }
+
+  // Start the application
+  initialize();
 });
