@@ -96,19 +96,30 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Error updating JSON data:", error);
     }
   };
-
+  
 async function fetchData() {
   const tebiUrl = "https://s3.tebi.io/baka-json/data.json?t=" + Date.now();
-
+  
   try {
-    const response = await fetch(tebiUrl);
-    if (!response.ok) throw new Error("Failed to fetch data");
+    const response = await fetch(tebiUrl, {
+      mode: 'cors', // Explicitly enable CORS
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      cache: 'no-store' // Prevent caching issues
+    });
+    
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    
     const data = await response.json();
     updateJsonData(data);
   } catch (error) {
-    console.error("Error fetching JSON:", error);
+    console.error("Fetch error:", error);
+    // Optional: Implement retry logic here
   }
-  setTimeout(fetchData, 1000);
+  
+  setTimeout(fetchData, 1000); // Continue polling
 }
 
   function updateClock() {
