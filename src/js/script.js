@@ -97,21 +97,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  async function fetchData() {
-    const apiUrl = "https://api.npoint.io/0689840ed795f3f9e622";
+async function fetchData() {
+  const tebiUrl = "https://s3.tebi.io/baka-json/data.json?t=" + Date.now();
 
-    try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error("Failed to fetch data");
-
-      const data = await response.json();
-      updateJsonData(data);
-    } catch (error) {
-      console.error("Error fetching JSON data:", error);
-    }
-
-    setTimeout(fetchData, 1000); // Slightly increase delay for better debouncing
+  try {
+    const response = await fetch(tebiUrl);
+    if (!response.ok) throw new Error("Failed to fetch data");
+    const data = await response.json();
+    updateJsonData(data);
+  } catch (error) {
+    console.error("Error fetching JSON:", error);
   }
+  setTimeout(fetchData, 1000);
+}
 
   function updateClock() {
     if (!dateOutput || !timeOutput) {
