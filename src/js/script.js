@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (Date.now() > targetTime.getTime()) {
       console.error("Target time is in the past!");
       countdown.innerText = "Stream is OVER!";
-      countdownDisplay.innerText = "Thanks everyone for your support!!.";
+      countdownDisplay.innerText = "Thanks everyone for your support!!";
       countdownDisplay.style.color = "white";
       return;
     }

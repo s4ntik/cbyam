@@ -64,8 +64,8 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  right: -10px;
-  bottom: 35px;
+  right: -15px;
+  bottom: 38px;
   font-style: italic;
   background-image: linear-gradient(
     to right,
@@ -103,7 +103,7 @@ body {
 #logo {
   position: absolute;
   height: 60px;
-  bottom: 12px;
+  bottom: 8px;
   right: 20px;
   opacity: 0.8;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
