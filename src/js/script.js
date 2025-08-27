@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const end = document.querySelector(".ending-class");
     const bigTextElement = document.querySelector(".big-text");
     const smallText2Element = document.querySelector(".small-text2");
-    const progressBar = document.querySelector(".progress-bar");
-    const superbowl = document.querySelector(".superbowl");
     const timer = document.querySelector(".timer");
 
     try {
@@ -56,16 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
       end.style.transition = parseBoolean(data.end)
         ? "opacity 2s linear"
         : "visibility 0s 2s, opacity 2s linear";
-      progressBar.style.visibility = parseBoolean(data.gamemode)
-        ? "visible"
-        : "hidden";
-      progressBar.style.opacity = parseBoolean(data.gamemode) ? "1" : "0";
-
-      superbowl.style.visibility = parseBoolean(data.gamemode)
-        ? "visible"
-        : "hidden";
-      superbowl.style.opacity = parseBoolean(data.gamemode) ? "1" : "0";
-
       lovense.style.visibility = parseBoolean(data.app) ? "visible" : "hidden";
       lovense.style.opacity = parseBoolean(data.app) ? "1" : "0";
       lovense.style.transition = parseBoolean(data.app)
@@ -196,7 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
     targetHour,
     targetMinute
   ) {
-    if (countdownInterval) clearInterval(countdownInterval); // Reset previous countdown
+  if (countdownInterval) clearInterval(countdownInterval); // Reset previous countdown
+  // Always reset the label when starting a new countdown
+  countdown.innerText = "Stream Ends in";
 
     const targetTime = new Date(
       targetYear,
