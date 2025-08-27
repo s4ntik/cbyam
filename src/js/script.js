@@ -235,7 +235,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function resetContainer() {
     const elm = document.querySelector(".container");
-    elm.innerHTML = elm.innerHTML; // Avoids flickering
+    if (elm) {
+      elm.innerHTML = elm.innerHTML; // Avoids flickering
+    }
   }
 
   function bounceJsonData() {
