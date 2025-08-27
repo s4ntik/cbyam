@@ -69,13 +69,16 @@ function sendUpdate(id, properties) {
 }
 
 // Event listeners for control elements
-document.getElementById('opacity').addEventListener('input', function() {
-    const id = Object.keys(images)[0]; // Assuming we have one selected
-    if (id) {
-        const opacity = this.value;
-        sendUpdate(id, { opacity });
-    }
-});
+const opacityInput = document.getElementById('opacity');
+if (opacityInput) {
+    opacityInput.addEventListener('input', function() {
+        const id = Object.keys(images)[0]; // Assuming we have one selected
+        if (id) {
+            const opacity = this.value;
+            sendUpdate(id, { opacity });
+        }
+    });
+}
 
 document.getElementById('opacity-input').addEventListener('change', function() {
     const id = Object.keys(images)[0];
