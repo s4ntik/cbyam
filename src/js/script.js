@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
   ) {
   if (countdownInterval) clearInterval(countdownInterval); // Reset previous countdown
   // Always reset the label when starting a new countdown
-  countdown.innerText = "8 Days Vacay starts in";
+  countdown.innerText = "Stream ends in";
 
     const targetTime = new Date(
       targetYear,
