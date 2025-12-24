@@ -275,7 +275,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/src/img/santa-sledge.gif");
+  background-image: url("https://i.ibb.co/Lzv2SWLb/santa-sledge.gif");
   /* make the background larger so the image can pan inside the fixed box */
   background-size: 100% auto;
   background-position: 0% 20%; /* start from left-lower area */
