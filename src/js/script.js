@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   
   // Tebi.io configuration
-  const JSON_URL = "https://s3.tebi.io/baka-json/data.json";
+  const JSON_URL = "https://api.npoint.io/0689840ed795f3f9e622";
   let currentData = null; // Cache the last fetched data
   let retryCount = 0;
   const MAX_RETRIES = 3;
