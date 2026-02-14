@@ -60,6 +60,86 @@
       <path class="cls-1"
         d="m99.9 196.6c-1.5 8-6.1 14.2-13.6 18.4s-17.4 6.5-29.8 6.5-19.9-1.7-25.2-5.2-7.3-8.6-6-15.2c0.8-4 2.9-7.4 6.4-10s7.5-3.9 12.1-3.9 9.4 1.2 12.1 3.6 3.7 5.6 2.9 9.5c-0.6 3.1-2.1 5.5-4.5 7.2s-5.5 2.7-9.3 2.9c-0.6 0.5-1 1-1.1 1.5s0 1 0.5 1.3 1.1 0.5 1.9 0.5c4 0 7.6-1.3 10.8-3.9s5.1-5.8 5.9-9.6c0.6-3.1 0.5-5.7-0.4-7.7s-2.6-3.9-5.1-5.5-6.1-3.2-10.7-4.7c-5.2-1.6-8.9-4.2-11-7.6s-2.8-7.5-1.8-12.3 3.3-9.1 7-12.8c3.8-3.8 8.7-6.6 14.6-8.9 6.1-2.1 12.9-3.3 20.4-3.3s18.5 1.8 23.8 5.4 7.3 8.6 6.1 15c-0.8 4-3 7.4-6.5 10-3.6 2.6-7.8 3.9-12.7 3.9s-8.9-1.2-11.5-3.6-3.6-5.6-2.8-9.5c0.6-3.1 2.1-5.5 4.5-7.2s5.5-2.7 9.3-2.9c0.6-0.5 1-1 1.1-1.5s0-1-0.5-1.3-1.1-0.5-1.9-0.5c-2.6 0-5 0.6-7.3 1.7-2.3 1.2-4.3 2.8-6.1 4.8-1.6 2-2.8 4.3-3.3 6.9-0.9 4.4 0 8 2.4 10.6 2.4 2.7 7 5 13.9 7 6.3 1.8 10.7 4.4 13.2 7.7 2.4 3.4 3.2 7.5 2.2 12.6z" />
     </svg>
+    <!-- Valentine banner: Happy Valentine + flying hearts (added) -->
+    <div id="valentine-banner" class="valentine-banner" aria-hidden="false">
+      <div id="valentine-text" class="valentine-text">Happy Valentine</div>
+      <div id="hearts-container" class="hearts-container" aria-hidden="true"></div>
+    </div>
+    <style id="valentine-styles">
+      /* Valentine banner + hearts (updated) */
+      #valentine-banner{
+        position: absolute;
+        bottom: 65px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        pointer-events: none;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:6px;
+      }
+      #valentine-text{
+        font-family: 'Lexend', Figtree, sans-serif;
+        font-weight:800;
+        font-size:32px;
+        background: linear-gradient(90deg,#ff7aa2,#ff2d63);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 6px 20px rgba(255,45,99,0.12);
+        letter-spacing:1px;
+        opacity: 0;
+        transform: translateY(6px) scale(.98);
+        transition: opacity 520ms cubic-bezier(.2,.9,.2,1), transform 520ms cubic-bezier(.2,.9,.2,1);
+        filter: drop-shadow(0 6px 18px rgba(255,45,99,0.08));
+      }
+      #valentine-text.visible{ opacity:1; transform: translateY(0) scale(1); animation: valentinePop 480ms cubic-bezier(.2,.9,.2,1); }
+      @keyframes valentinePop{ 0%{ transform: translateY(6px) scale(.9); opacity:0 } 60%{ transform: translateY(-2px) scale(1.05); opacity:1 } 100%{ transform: translateY(0) scale(1) } }
+
+      /* logo color change (no rotation) */
+      /* smooth transition for the svg fill, override comes from this later rule */
+      #logo .cls-1{ transition: fill 600ms cubic-bezier(.2,.9,.2,1), opacity 400ms linear; }
+      /* when active, tint the logo to match the Valentine text */
+      #logo.logo-valentine .cls-1{ fill: #ff2d63; filter: drop-shadow(0 6px 18px rgba(255,45,99,0.12)); }
+
+      /* floating hearts above the text */
+      .hearts-container{ position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 360px; height: 110px; pointer-events:none; overflow:visible; }
+      .floating-heart{
+        position: absolute;
+        bottom: 6px;
+        will-change: transform, opacity;
+        color: #ff3a6b;
+        text-shadow: 0 6px 18px rgba(255,45,99,0.12);
+        opacity: 0;
+        transform-origin: 50% 50%;
+        pointer-events: none;
+        animation-name: floatUp;
+        animation-timing-function: cubic-bezier(.2,.9,.2,1);
+        animation-fill-mode: forwards;
+      }
+      @keyframes floatUp{ 0%{ transform: translateY(0) translateX(0) scale(.85) rotate(0deg); opacity:0 } 10%{ opacity:1 } 100%{ transform: translateY(-140px) translateX(var(--dx,0px)) scale(1.12) rotate(var(--rot,20deg)); opacity:0 } }
+
+      /* keep existing flying-heart style (logo→text) */
+      .valentine-heart{
+        position: fixed;
+        left:0; top:0;
+        font-size:20px;
+        line-height:1;
+        transform: translate(-50%,-50%) scale(1) rotate(0deg);
+        transition: transform 1100ms cubic-bezier(.2,.9,.2,1), opacity 1100ms linear;
+        will-change: transform, opacity;
+        color: #ff3a6b;
+        text-shadow: 0 6px 18px rgba(255,45,99,0.12);
+        pointer-events: none;
+      }
+      .valentine-heart.small{ font-size:14px; opacity:0.95; }
+      .valentine-heart.big{ font-size:26px; opacity:1; }
+      @media (max-width:640px){
+        #valentine-text{ font-size:20px; }
+        .hearts-container{ width:220px; top:-4px; height:80px; }
+      }
+    </style>
     <div class="timer">
       <div id="countdown">Stream ends in</div>
       <div id="countdown-display"></div>
@@ -88,6 +168,118 @@
   <script src="./src/js/lovense-app.min.js"></script>
   <script src="./src/js/chunk-libs.d777a9ce.js"></script>
   <script src="./src/js/app.e5054d60.js"></script>
+  <script>
+    // Valentine hearts: reveal sequence + flying + floating hearts (auto-run after 4s)
+    (function(){
+      const logo = document.getElementById('logo');
+      const valentineText = document.getElementById('valentine-text');
+      const heartsContainer = document.getElementById('hearts-container');
+      if(!logo || !valentineText || !heartsContainer) return;
+      let revealed = false;
+      const body = document.body;
+
+      function centerOf(el){
+        const r = el.getBoundingClientRect();
+        return { x: r.left + r.width/2, y: r.top + r.height/2 };
+      }
+
+      // --- flying hearts (logo <-> text) ---
+      function spawnHeart(direction){
+        const startEl = direction === 'logo->text' ? logo : valentineText;
+        const endEl = direction === 'logo->text' ? valentineText : logo;
+        const start = centerOf(startEl);
+        const end = centerOf(endEl);
+        const heart = document.createElement('div');
+        heart.className = 'valentine-heart ' + (Math.random()>0.6 ? 'big' : 'small');
+        heart.textContent = '❤';
+        heart.style.left = start.x + 'px';
+        heart.style.top = start.y + 'px';
+        heart.style.opacity = '1';
+        body.appendChild(heart);
+        heart.getBoundingClientRect();
+        const dx = end.x - start.x;
+        const dy = end.y - start.y;
+        const rotate = (Math.random()*80 - 40);
+        const scale = 0.8 + Math.random()*0.6;
+        heart.style.transform = `translate(${dx}px, ${dy}px) rotate(${rotate}deg) scale(${scale})`;
+        heart.style.opacity = '0';
+        setTimeout(()=> heart.remove(), 1250);
+      }
+      let forward = true;
+      let flySpawnId = null;
+      function startFlyingHearts(){ if (flySpawnId) return; flySpawnId = setInterval(()=>{ spawnHeart(forward? 'logo->text' : 'text->logo'); forward = !forward; }, 500); }
+      function stopFlyingHearts(){ if(!flySpawnId) return; clearInterval(flySpawnId); flySpawnId = null; }
+      startFlyingHearts();
+
+      // --- floating hearts above the text (triggered on reveal) ---
+      let floatId = null;
+      function spawnFloatingHeart(){
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = '❤';
+        const size = 12 + Math.floor(Math.random()*28);
+        heart.style.fontSize = size + 'px';
+        const maxW = Math.max(heartsContainer.clientWidth, 200);
+        const left = Math.floor(10 + Math.random() * (maxW - 20));
+        heart.style.left = left + 'px';
+        const drift = Math.floor((Math.random() - 0.5) * 160);
+        const rot = Math.floor((Math.random() - 0.5) * 60);
+        const dur = 1400 + Math.floor(Math.random()*1000);
+        heart.style.setProperty('--dx', drift + 'px');
+        heart.style.setProperty('--rot', rot + 'deg');
+        heart.style.animationDuration = dur + 'ms';
+        heartsContainer.appendChild(heart);
+        setTimeout(()=> heart.remove(), dur + 50);
+      }
+      function startFloatingHearts(){ if (floatId) return; floatId = setInterval(()=> { spawnFloatingHeart(); if (Math.random() > 0.6) spawnFloatingHeart(); }, 180); }
+      function stopFloatingHearts(){ if(!floatId) return; clearInterval(floatId); floatId = null; }
+
+      // --- reveal / hide cycle (logo color toggle, no rotation) ---
+      let cycleTimer = null;
+      function revealValentine(){
+        if (revealed) return;
+        revealed = true;
+        stopFlyingHearts();
+        // tint the logo to match the banner text
+        logo.classList.add('logo-valentine');
+        valentineText.classList.add('visible');
+        startFloatingHearts();
+        // schedule hide after 40s
+        if (cycleTimer) clearTimeout(cycleTimer);
+        cycleTimer = setTimeout(hideValentine, 30000);
+      }
+      function hideValentine(){
+        if (!revealed) return;
+        revealed = false;
+        startFlyingHearts();
+        logo.classList.remove('logo-valentine');
+        valentineText.classList.remove('visible');
+        stopFloatingHearts();
+        // schedule next reveal after 40s
+        if (cycleTimer) clearTimeout(cycleTimer);
+        cycleTimer = setTimeout(revealValentine, 40000);
+      }
+      function toggleValentine(){ (revealed ? hideValentine : revealValentine)(); }
+      window.revealValentine = revealValentine;
+      window.hideValentine = hideValentine;
+      window.toggleValentine = toggleValentine;
+
+      // auto-run after 4s (chosen)
+      setTimeout(revealValentine, 4000);
+
+      // pause/resume on visibility change
+      document.addEventListener('visibilitychange', ()=> {
+        if (document.hidden){
+          stopFlyingHearts();
+          stopFloatingHearts();
+        } else {
+          if (!revealed) startFlyingHearts();
+          else startFloatingHearts();
+        }
+      });
+
+    })();
+  </script>
   <script>
     // Handle messages from the parent window
     window.addEventListener('message', (event) => {
