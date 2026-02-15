@@ -177,37 +177,40 @@
     /* Position: left center; keeps bouncing forever. Customize via CSS variables on #toy-bounce */
     .bouncing-toy{
       position: fixed;
-      left: 18px;
-      top: 50%;
+      left: 15px;
+      top: 45%;
       transform: translateY(-50%);
       z-index: 99999;
       pointer-events: none; /* doesn't block clicks */
     }
     .bouncing-toy .toy-inner{
       display: flex;
+      flex-direction: column; /* image above, text below */
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       transform-origin: center;
     }
     .bouncing-toy .toy-img{
-      width: 120px;
+      width: 130px;
       height: auto;
       display: block;
       border-radius: 8px;
       background: transparent;
-      animation: toyBounce 0.83s infinite;
+      animation: toyBounce 0.83s infinite; /* image keeps bouncing */
       will-change: transform;
     }
     .toy-badge{
       background: #ff2d89;
       color: var(--toy-badge-color, #fff);
-      padding: 10px;
+      padding: 10px 12px;
       border-radius: 10px;
-      font-weight: 900;
-      font-family: "Figtree", sans-serif;
-      font-size: 16px;
+      font-weight: 700;
+      font-family: monospace;
+      font-size: 18px;
       text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.7);
-      white-space: nowrap;
+      white-space: normal;
+      text-align: center;
+      max-width: 300px;
       transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.9,.2,1);
       will-change: opacity, transform;
       opacity: 1;
@@ -215,7 +218,9 @@
     .toy-badge.toy-badge--hidden{
       opacity: 0;
       transform: translateY(6px) scale(.98);
+      animation: none; /* stop bounce while swapping */
     }
+
     @keyframes toyBounce{
   0% { transform: translateX(0) }
   25% { transform: translateY(-9px) }
@@ -237,37 +242,61 @@
       const badge = document.querySelector('#toy-bounce .toy-badge');
       if (!badge) return;
 
-      const texts = ['All tips will','help fund','my dream TOY!','Thank you!'];
-      let idx = texts.indexOf(badge.textContent) >= 0 ? texts.indexOf(badge.textContent) : 0;
-      badge.textContent = texts[idx];
+      // messages with per-item durations (ms)
+      const items = [
+        { text: 'All tips will help me fund my dream TOY!', duration: 15000 }, // longer
+        { text: 'Thank you!', duration: 5000 } // shorter
+      ];
 
-      const swapInterval = 2800;
-      function swapOnce(nextIdx){
+      let idx = 0;
+      badge.textContent = items[idx].text;
+
+      let swapTimer = null;
+
+      function doSwap(nextIdx){
         badge.classList.add('toy-badge--hidden');
         setTimeout(()=>{
-          badge.textContent = texts[nextIdx];
+          badge.textContent = items[nextIdx].text;
           badge.classList.remove('toy-badge--hidden');
+          scheduleNext(nextIdx);
         }, 220);
       }
 
-      window._toyBadgeInterval = setInterval(()=>{
-        idx = (idx + 1) % texts.length;
-        swapOnce(idx);
-      }, swapInterval);
+      function scheduleNext(currentIdx){
+        clearTimeout(swapTimer);
+        const dur = (items[currentIdx] && items[currentIdx].duration) ? items[currentIdx].duration : 2800;
+        swapTimer = setTimeout(()=>{
+          idx = (currentIdx + 1) % items.length;
+          doSwap(idx);
+        }, dur);
+      }
 
-      // API to change texts / interval at runtime
-      window.setToyBadgeTexts = (arr, intervalMs = 2800) => {
+      // start rotation
+      scheduleNext(0);
+
+      // API to set new texts. Accepts array of strings OR array of {text,duration}
+      window.setToyBadgeTexts = (arr, defaultDuration = 2800) => {
         if (!Array.isArray(arr) || arr.length === 0) return;
-        texts.length = 0;
-        arr.forEach(v => texts.push(String(v)));
+        const newItems = arr.map(v => {
+          if (typeof v === 'string') return { text: v, duration: defaultDuration };
+          if (v && typeof v === 'object' && 'text' in v) return { text: String(v.text), duration: Number(v.duration) || defaultDuration };
+          return null;
+        }).filter(Boolean);
+        if (newItems.length === 0) return;
+        items.length = 0;
+        Array.prototype.push.apply(items, newItems);
         idx = 0;
-        swapOnce(0);
-        clearInterval(window._toyBadgeInterval);
-        window._toyBadgeInterval = setInterval(()=>{
-          idx = (idx + 1) % texts.length;
-          swapOnce(idx);
-        }, intervalMs);
+        badge.classList.add('toy-badge--hidden');
+        setTimeout(()=>{
+          badge.textContent = items[0].text;
+          badge.classList.remove('toy-badge--hidden');
+          scheduleNext(0);
+        }, 220);
       };
+
+      window.stopToyBadgeRotation = () => { clearTimeout(swapTimer); swapTimer = null; };
+      window.startToyBadgeRotation = () => { if (!swapTimer) scheduleNext(idx); };
+
     })();
   </script>
 
