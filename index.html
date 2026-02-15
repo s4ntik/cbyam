@@ -161,6 +161,116 @@
   </div>
   <!-- Percentage -->
   <div id="image-container"></div>
+
+  <!-- Left-center bouncing toy (moved to its own top-level div) -->
+  <div id="toy-wrapper">
+    <div id="toy-bounce" class="bouncing-toy" style="--toy-badge-bg:#ff6b6b; --toy-badge-color:#fff;">
+      <div class="toy-inner">
+        <img src="./src/img/toy.png" alt="toy" class="toy-img">
+        <div class="toy-badge">Toy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Styles for the bouncing toy -->
+  <style id="toy-styles">
+    /* Position: left center; keeps bouncing forever. Customize via CSS variables on #toy-bounce */
+    .bouncing-toy{
+      position: fixed;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 99999;
+      pointer-events: none; /* doesn't block clicks */
+    }
+    .bouncing-toy .toy-inner{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform-origin: center;
+    }
+    .bouncing-toy .toy-img{
+      width: 120px;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      background: transparent;
+      animation: toyBounce 0.83s infinite;
+      will-change: transform;
+    }
+    .toy-badge{
+      background: #ff2d89;
+      color: var(--toy-badge-color, #fff);
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 900;
+      font-family: "Figtree", sans-serif;
+      font-size: 16px;
+      text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.7);
+      white-space: nowrap;
+      transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.9,.2,1);
+      will-change: opacity, transform;
+      opacity: 1;
+    }
+    .toy-badge.toy-badge--hidden{
+      opacity: 0;
+      transform: translateY(6px) scale(.98);
+    }
+    @keyframes toyBounce{
+  0% { transform: translateX(0) }
+  25% { transform: translateY(-9px) }
+  35% { transform: translateY(-9px) rotate(17deg) }
+  55% { transform: translateY(-9px) rotate(-17deg) }
+  65% { transform: translateY(-9px) rotate(17deg) }
+  75% { transform: translateY(-9px) rotate(-17deg) }
+  100% { transform: translateY(0) rotate(0) }
+    }
+    @media (max-width:640px){
+      .toy-img{ width:48px; }
+      .toy-badge{ font-size:12px; padding:5px 8px; }
+      .bouncing-toy{ left:10px; }
+    }
+  </style>
+
+  <script id="toy-script">
+    (function(){
+      const badge = document.querySelector('#toy-bounce .toy-badge');
+      if (!badge) return;
+
+      const texts = ['All tips will','help fund','my dream TOY!','Thank you!'];
+      let idx = texts.indexOf(badge.textContent) >= 0 ? texts.indexOf(badge.textContent) : 0;
+      badge.textContent = texts[idx];
+
+      const swapInterval = 2800;
+      function swapOnce(nextIdx){
+        badge.classList.add('toy-badge--hidden');
+        setTimeout(()=>{
+          badge.textContent = texts[nextIdx];
+          badge.classList.remove('toy-badge--hidden');
+        }, 220);
+      }
+
+      window._toyBadgeInterval = setInterval(()=>{
+        idx = (idx + 1) % texts.length;
+        swapOnce(idx);
+      }, swapInterval);
+
+      // API to change texts / interval at runtime
+      window.setToyBadgeTexts = (arr, intervalMs = 2800) => {
+        if (!Array.isArray(arr) || arr.length === 0) return;
+        texts.length = 0;
+        arr.forEach(v => texts.push(String(v)));
+        idx = 0;
+        swapOnce(0);
+        clearInterval(window._toyBadgeInterval);
+        window._toyBadgeInterval = setInterval(()=>{
+          idx = (idx + 1) % texts.length;
+          swapOnce(idx);
+        }, intervalMs);
+      };
+    })();
+  </script>
+
   <!-- Scripts -->
   <script src="./src/js/client.js"></script>
   <script src="./src/js/script.js"></script>
