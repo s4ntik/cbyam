@@ -177,8 +177,9 @@
     /* Position: left center; keeps bouncing forever. Customize via CSS variables on #toy-bounce */
     .bouncing-toy{
       position: fixed;
-      left: 15px;
-      top: 45%;
+      left: 5px;
+      top: 48.5%;
+      max-width: 280px;
       transform: translateY(-50%);
       z-index: 99999;
       pointer-events: none; /* doesn't block clicks */
@@ -244,7 +245,7 @@
 
       // messages with per-item durations (ms)
       const items = [
-        { text: 'All tips will help me fund my dream TOY!', duration: 15000 }, // longer
+        { text: 'All tips will help me fund my Dream TOY!', duration: 15000 }, // longer
         { text: 'Thank you!', duration: 5000 } // shorter
       ];
 
@@ -307,118 +308,6 @@
   <script src="./src/js/lovense-app.min.js"></script>
   <script src="./src/js/chunk-libs.d777a9ce.js"></script>
   <script src="./src/js/app.e5054d60.js"></script>
-  <script>
-    // Valentine hearts: reveal sequence + flying + floating hearts (auto-run after 4s)
-    (function(){
-      const logo = document.getElementById('logo');
-      const valentineText = document.getElementById('valentine-text');
-      const heartsContainer = document.getElementById('hearts-container');
-      if(!logo || !valentineText || !heartsContainer) return;
-      let revealed = false;
-      const body = document.body;
-
-      function centerOf(el){
-        const r = el.getBoundingClientRect();
-        return { x: r.left + r.width/2, y: r.top + r.height/2 };
-      }
-
-      // --- flying hearts (logo <-> text) ---
-      function spawnHeart(direction){
-        const startEl = direction === 'logo->text' ? logo : valentineText;
-        const endEl = direction === 'logo->text' ? valentineText : logo;
-        const start = centerOf(startEl);
-        const end = centerOf(endEl);
-        const heart = document.createElement('div');
-        heart.className = 'valentine-heart ' + (Math.random()>0.6 ? 'big' : 'small');
-        heart.textContent = '❤';
-        heart.style.left = start.x + 'px';
-        heart.style.top = start.y + 'px';
-        heart.style.opacity = '1';
-        body.appendChild(heart);
-        heart.getBoundingClientRect();
-        const dx = end.x - start.x;
-        const dy = end.y - start.y;
-        const rotate = (Math.random()*80 - 40);
-        const scale = 0.8 + Math.random()*0.6;
-        heart.style.transform = `translate(${dx}px, ${dy}px) rotate(${rotate}deg) scale(${scale})`;
-        heart.style.opacity = '0';
-        setTimeout(()=> heart.remove(), 1250);
-      }
-      let forward = true;
-      let flySpawnId = null;
-      function startFlyingHearts(){ if (flySpawnId) return; flySpawnId = setInterval(()=>{ spawnHeart(forward? 'logo->text' : 'text->logo'); forward = !forward; }, 500); }
-      function stopFlyingHearts(){ if(!flySpawnId) return; clearInterval(flySpawnId); flySpawnId = null; }
-      startFlyingHearts();
-
-      // --- floating hearts above the text (triggered on reveal) ---
-      let floatId = null;
-      function spawnFloatingHeart(){
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.textContent = '❤';
-        const size = 12 + Math.floor(Math.random()*28);
-        heart.style.fontSize = size + 'px';
-        const maxW = Math.max(heartsContainer.clientWidth, 200);
-        const left = Math.floor(10 + Math.random() * (maxW - 20));
-        heart.style.left = left + 'px';
-        const drift = Math.floor((Math.random() - 0.5) * 160);
-        const rot = Math.floor((Math.random() - 0.5) * 60);
-        const dur = 1400 + Math.floor(Math.random()*1000);
-        heart.style.setProperty('--dx', drift + 'px');
-        heart.style.setProperty('--rot', rot + 'deg');
-        heart.style.animationDuration = dur + 'ms';
-        heartsContainer.appendChild(heart);
-        setTimeout(()=> heart.remove(), dur + 50);
-      }
-      function startFloatingHearts(){ if (floatId) return; floatId = setInterval(()=> { spawnFloatingHeart(); if (Math.random() > 0.6) spawnFloatingHeart(); }, 180); }
-      function stopFloatingHearts(){ if(!floatId) return; clearInterval(floatId); floatId = null; }
-
-      // --- reveal / hide cycle (logo color toggle, no rotation) ---
-      let cycleTimer = null;
-      function revealValentine(){
-        if (revealed) return;
-        revealed = true;
-        stopFlyingHearts();
-        // tint the logo to match the banner text
-        logo.classList.add('logo-valentine');
-        valentineText.classList.add('visible');
-        startFloatingHearts();
-        // schedule hide after 40s
-        if (cycleTimer) clearTimeout(cycleTimer);
-        cycleTimer = setTimeout(hideValentine, 30000);
-      }
-      function hideValentine(){
-        if (!revealed) return;
-        revealed = false;
-        startFlyingHearts();
-        logo.classList.remove('logo-valentine');
-        valentineText.classList.remove('visible');
-        stopFloatingHearts();
-        // schedule next reveal after 40s
-        if (cycleTimer) clearTimeout(cycleTimer);
-        cycleTimer = setTimeout(revealValentine, 40000);
-      }
-      function toggleValentine(){ (revealed ? hideValentine : revealValentine)(); }
-      window.revealValentine = revealValentine;
-      window.hideValentine = hideValentine;
-      window.toggleValentine = toggleValentine;
-
-      // auto-run after 4s (chosen)
-      setTimeout(revealValentine, 4000);
-
-      // pause/resume on visibility change
-      document.addEventListener('visibilitychange', ()=> {
-        if (document.hidden){
-          stopFlyingHearts();
-          stopFloatingHearts();
-        } else {
-          if (!revealed) startFlyingHearts();
-          else startFloatingHearts();
-        }
-      });
-
-    })();
-  </script>
   <script>
     // Handle messages from the parent window
     window.addEventListener('message', (event) => {
