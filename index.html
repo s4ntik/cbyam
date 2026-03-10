@@ -122,38 +122,6 @@
       }
     });
   </script>
-  <style>
-    @keyframes colorChange {
-      0% { color: #ff69b4; }
-      25% { color: #ffb6c1; }
-      50% { color: #ffc0cb; }
-      75% { color: #ffb6c1; }
-      100% { color: #ff69b4; }
-    }
-    @keyframes fall {
-      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
-    }
-    .flower {
-      position: absolute;
-      top: 0;
-      font-size: 24px;
-      animation: fall 5s linear infinite;
-      pointer-events: none;
-    }
-  </style>
-  <!-- GIF and Text -->
-  <div style="position: absolute; bottom: 10px; left: 10px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-    <img src="./src/img/bunny.gif" style="width: 230px; border-radius: 6px;">
-    <span style="animation: colorChange 2s infinite; font-weight: bold;">Happy Women's Day</span>
-    <!-- Falling Flowers -->
-    <div class="flower" style="left: 10%; animation-delay: 0s;">🌸</div>
-    <div class="flower" style="left: 20%; animation-delay: 1s;">🌺</div>
-    <div class="flower" style="left: 40%; animation-delay: 3s;">🌷</div>
-    <div class="flower" style="left: 60%; animation-delay: 0.5s;">🌸</div>
-    <div class="flower" style="left: 70%; animation-delay: 1.5s;">🌺</div>
-    <div class="flower" style="left: 90%; animation-delay: 3.5s;">🌷</div>
-  </div>
 </body>
 
 </html>
