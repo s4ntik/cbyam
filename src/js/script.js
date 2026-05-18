@@ -12,63 +12,46 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================
 
   const parseBoolean = (value) => {
-    return ["true", "1", "yes"].includes(
-      String(value).toLowerCase()
-    );
+    return ["true", "1", "yes"].includes(String(value).toLowerCase());
   };
 
-  // Replace with your own emoji parser if needed
   function replaceEmojiShortcodesWithImage(text) {
     return text || "";
   }
 
   // =========================
-  // Update UI
+  // UI Update
   // =========================
 
   function updateJsonData(data) {
     if (!data) {
-      console.error("No data received");
+      console.error("Data is undefined");
       return;
     }
 
     try {
-      const siteStatus =
-        document.getElementById("json-data");
-
-      const lovense =
-        document.getElementById("app");
-
-      const brb =
-        document.querySelector(".brb-class");
-
-      const end =
-        document.querySelector(".ending-class");
-
-      const bigTextElement =
-        document.querySelector(".big-text");
-
+      const siteStatus = document.getElementById("json-data");
+      const lovense = document.getElementById("app");
+      const brb = document.querySelector(".brb-class");
+      const end = document.querySelector(".ending-class");
+      const bigTextElement = document.querySelector(".big-text");
       const smallText2Element =
         document.querySelector(".small-text2");
+      const timer = document.querySelector(".timer");
 
-      const timer =
-        document.querySelector(".timer");
-
-      // Big text
+      // Text
       bigTextElement.innerHTML =
         replaceEmojiShortcodesWithImage(
           data["big-text"] || ""
         );
 
-      // Small text
       smallText2Element.innerHTML =
         replaceEmojiShortcodesWithImage(
           data["small-text2"] || ""
         );
 
-      // Username/site
-      const username =
-        data.username || "";
+      // Site status
+      const username = data.username || "";
 
       const site =
         parseInt(data.site, 10) === 1
@@ -77,77 +60,61 @@ document.addEventListener("DOMContentLoaded", function () {
           ? "SC"
           : "Unknown";
 
-      siteStatus.textContent =
-        `${site}: ${username}`;
+      siteStatus.textContent = `${site}: ${username}`;
 
-      siteStatus.style.visibility =
-        parseBoolean(data.status)
-          ? "visible"
-          : "hidden";
+      siteStatus.style.visibility = parseBoolean(data.status)
+        ? "visible"
+        : "hidden";
 
       // BRB
-      brb.style.visibility =
-        parseBoolean(data.brb)
-          ? "visible"
-          : "hidden";
+      brb.style.visibility = parseBoolean(data.brb)
+        ? "visible"
+        : "hidden";
 
-      brb.style.opacity =
-        parseBoolean(data.brb)
-          ? "1"
-          : "0";
+      brb.style.opacity = parseBoolean(data.brb)
+        ? "1"
+        : "0";
 
-      brb.style.transition =
-        parseBoolean(data.brb)
-          ? "opacity 2s linear"
-          : "visibility 0s 2s, opacity 2s linear";
+      brb.style.transition = parseBoolean(data.brb)
+        ? "opacity 2s linear"
+        : "visibility 0s 2s, opacity 2s linear";
 
-      // END
-      end.style.visibility =
-        parseBoolean(data.end)
-          ? "visible"
-          : "hidden";
+      // Ending
+      end.style.visibility = parseBoolean(data.end)
+        ? "visible"
+        : "hidden";
 
-      end.style.opacity =
-        parseBoolean(data.end)
-          ? "1"
-          : "0";
+      end.style.opacity = parseBoolean(data.end)
+        ? "1"
+        : "0";
 
-      end.style.transition =
-        parseBoolean(data.end)
-          ? "opacity 2s linear"
-          : "visibility 0s 2s, opacity 2s linear";
+      end.style.transition = parseBoolean(data.end)
+        ? "opacity 2s linear"
+        : "visibility 0s 2s, opacity 2s linear";
 
-      // APP
-      lovense.style.visibility =
-        parseBoolean(data.app)
-          ? "visible"
-          : "hidden";
+      // Lovense
+      lovense.style.visibility = parseBoolean(data.app)
+        ? "visible"
+        : "hidden";
 
-      lovense.style.opacity =
-        parseBoolean(data.app)
-          ? "1"
-          : "0";
+      lovense.style.opacity = parseBoolean(data.app)
+        ? "1"
+        : "0";
 
-      lovense.style.transition =
-        parseBoolean(data.app)
-          ? "opacity 2s linear"
-          : "visibility 0s 2s, opacity 2s linear";
+      lovense.style.transition = parseBoolean(data.app)
+        ? "opacity 2s linear"
+        : "visibility 0s 2s, opacity 2s linear";
 
-      // TIMER
-      timer.style.visibility =
-        parseBoolean(data.timer)
-          ? "visible"
-          : "hidden";
+      // Timer
+      timer.style.visibility = parseBoolean(data.timer)
+        ? "visible"
+        : "hidden";
 
-      timer.style.opacity =
-        parseBoolean(data.timer)
-          ? "1"
-          : "0";
+      timer.style.opacity = parseBoolean(data.timer)
+        ? "1"
+        : "0";
 
-      timer.classList.remove(
-        "slide-in",
-        "slide-out"
-      );
+      timer.classList.remove("slide-in", "slide-out");
 
       timer.classList.add(
         parseBoolean(data.timer)
@@ -157,14 +124,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Custom opacity
       if (data["user-opacity"]) {
-        siteStatus.style.opacity =
-          data["user-opacity"];
+        siteStatus.style.opacity = data["user-opacity"];
       }
 
       // Custom font size
       if (data["user-size"]) {
-        siteStatus.style.fontSize =
-          data["user-size"];
+        siteStatus.style.fontSize = data["user-size"];
       }
 
       // Countdown
@@ -186,25 +151,20 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       }
     } catch (error) {
-      console.error(
-        "Error updating JSON data:",
-        error
-      );
+      console.error("Error updating UI:", error);
     }
   }
 
   // =========================
-  // JSON Hosting Fetch
+  // Fetch Logic
   // =========================
 
   const JSON_URL =
-    "https://jsonhosting.com/api/json/707f571a";
+    "https://api.npoint.io/0689840ed795f3f9e622";
 
   let currentData = null;
+  let pollingDelay = 5000;
   let isFetching = false;
-
-  // 45 seconds = ~80 req/hour
-  const POLLING_INTERVAL = 45000;
 
   async function fetchData() {
     if (isFetching) return;
@@ -223,23 +183,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       );
 
-      // Rate limited
+      // Rate limit handling
       if (response.status === 429) {
         console.warn(
-          "JSONHosting rate limit hit"
+          "Rate limited. Increasing delay..."
         );
+
+        pollingDelay = Math.min(
+          pollingDelay * 2,
+          60000
+        );
+
         return;
       }
 
       if (!response.ok) {
         throw new Error(
-          `HTTP ${response.status}`
+          `HTTP Error ${response.status}`
         );
       }
 
       const data = await response.json();
 
-      // Update only if changed
+      // Reset polling delay on success
+      pollingDelay = 5000;
+
+      // Only update if changed
       if (
         JSON.stringify(data) !==
         JSON.stringify(currentData)
@@ -248,16 +217,65 @@ document.addEventListener("DOMContentLoaded", function () {
         updateJsonData(data);
       }
     } catch (error) {
-      console.error(
-        "Fetch failed:",
+      console.warn(
+        "Direct fetch failed:",
         error
+      );
+
+      // Try proxy fallback
+      await tryProxyFallback();
+
+      // Slow down after failures
+      pollingDelay = Math.min(
+        pollingDelay * 2,
+        60000
       );
     } finally {
       isFetching = false;
 
-      setTimeout(
-        fetchData,
-        POLLING_INTERVAL
+      setTimeout(fetchData, pollingDelay);
+    }
+  }
+
+  // =========================
+  // Proxy Fallback
+  // =========================
+
+  async function tryProxyFallback() {
+    try {
+      const proxyUrl =
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(JSON_URL)}`;
+
+      const response = await fetch(proxyUrl);
+
+      if (!response.ok) {
+        throw new Error(
+          `Proxy HTTP ${response.status}`
+        );
+      }
+
+      const text = await response.text();
+
+      // Prevent invalid JSON parse
+      if (!text.trim().startsWith("{")) {
+        throw new Error(
+          "Proxy returned invalid JSON"
+        );
+      }
+
+      const data = JSON.parse(text);
+
+      if (
+        JSON.stringify(data) !==
+        JSON.stringify(currentData)
+      ) {
+        currentData = data;
+        updateJsonData(data);
+      }
+    } catch (proxyError) {
+      console.error(
+        "Proxy fallback failed:",
+        proxyError
       );
     }
   }
@@ -269,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateClock() {
     if (!dateOutput || !timeOutput) {
       console.error(
-        "Clock elements missing"
+        "Missing clock elements"
       );
       return;
     }
@@ -319,8 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
       clearInterval(countdownInterval);
     }
 
-    countdown.innerText =
-      "Stream ends in";
+    countdown.innerText = "Stream ends in";
 
     const targetTime = new Date(
       targetYear,
@@ -331,10 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
       0
     );
 
-    if (
-      Date.now() >
-      targetTime.getTime()
-    ) {
+    if (Date.now() > targetTime.getTime()) {
       countdown.innerText =
         "Stream is OVER!";
 
@@ -351,13 +365,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const now = new Date();
 
       const timeDiff =
-        targetTime.getTime() -
-        now.getTime();
+        targetTime.getTime() - now.getTime();
 
       if (timeDiff <= 0) {
-        clearInterval(
-          countdownInterval
-        );
+        clearInterval(countdownInterval);
 
         countdown.innerText =
           "Stream is OVER!";
@@ -374,16 +385,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const hours = Math.floor(
-        (timeDiff /
-          (1000 * 60 * 60)) %
-          24
+        (timeDiff / (1000 * 60 * 60)) % 24
       )
         .toString()
         .padStart(2, "0");
 
       const minutes = Math.floor(
-        (timeDiff / (1000 * 60)) %
-          60
+        (timeDiff / (1000 * 60)) % 60
       )
         .toString()
         .padStart(2, "0");
@@ -400,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =========================
-  // Reset Container
+  // Container Reset
   // =========================
 
   function resetContainer() {
@@ -424,6 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error(
         "#json-data not found"
       );
+
       return;
     }
 
@@ -447,8 +456,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (
         x <= 0 ||
-        x + jsonData.offsetWidth >=
-          parentWidth
+        x + jsonData.offsetWidth >= parentWidth
       ) {
         xDirection *= -1;
       }
@@ -478,17 +486,11 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       updateClock();
 
-      setInterval(
-        updateClock,
-        1000
-      );
+      setInterval(updateClock, 1000);
 
       fetchData();
 
-      setInterval(
-        resetContainer,
-        22000
-      );
+      setInterval(resetContainer, 22000);
 
       bounceJsonData();
     } catch (error) {
@@ -497,10 +499,7 @@ document.addEventListener("DOMContentLoaded", function () {
         error
       );
 
-      setTimeout(
-        initialize,
-        2000
-      );
+      setTimeout(initialize, 2000);
     }
   }
 
