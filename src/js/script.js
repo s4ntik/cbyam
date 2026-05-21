@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       const siteStatus = document.getElementById("json-data");
-      const lovense = document.getElementById("app");
       const brb = document.querySelector(".brb-class");
       const end = document.querySelector(".ending-class");
       const bigTextElement = document.querySelector(".big-text");
@@ -89,19 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
         : "0";
 
       end.style.transition = parseBoolean(data.end)
-        ? "opacity 2s linear"
-        : "visibility 0s 2s, opacity 2s linear";
-
-      // Lovense
-      lovense.style.visibility = parseBoolean(data.app)
-        ? "visible"
-        : "hidden";
-
-      lovense.style.opacity = parseBoolean(data.app)
-        ? "1"
-        : "0";
-
-      lovense.style.transition = parseBoolean(data.app)
         ? "opacity 2s linear"
         : "visibility 0s 2s, opacity 2s linear";
 
@@ -284,43 +270,37 @@ document.addEventListener("DOMContentLoaded", function () {
   // Clock
   // =========================
 
-  function updateClock() {
-    if (!dateOutput || !timeOutput) {
-      console.error(
-        "Missing clock elements"
-      );
-      return;
-    }
-
-    const now = new Date();
-
-    dateOutput.innerText =
-      now.toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-      });
-
-    const timeString =
-      now.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
-
-    const [hours, minutesAndPeriod] =
-      timeString.split(":");
-
-    const [minutes, period] =
-      minutesAndPeriod.split(" ");
-
-    timeOutput.innerHTML = `
-      <span class="hour">${hours.trim()}</span>:
-      <span class="minutes">${minutes.trim()}</span>
-      &nbsp;
-      <span class="period">${period.trim()}</span>
-    `;
+function updateClock() {
+  if (!dateOutput || !timeOutput) {
+    console.error("Missing clock elements");
+    return;
   }
+
+  const now = new Date();
+
+  dateOutput.innerText = now.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  const timeString = now.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  // Split more carefully
+  const match = timeString.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  
+  if (match) {
+    const hours = match[1];
+    const minutes = match[2];
+    const period = match[3];
+    
+    timeOutput.innerHTML = `${hours}:${minutes} ${period}`;
+  }
+}
 
   // =========================
   // Countdown

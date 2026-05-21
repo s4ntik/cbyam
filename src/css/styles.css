@@ -23,13 +23,14 @@ body {
   top: 10px;
   right: 30px;
   display: flex;
-  flex-direction: row; /* Align elements side-by-side */
-  align-items: center; /* Vertically align items */
-  justify-content: space-between; /* Add spacing between elements */
-  gap: 15px; /* Increase spacing between #date and #time */
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
 }
 
 #date {
+  order: 1;
   color: white;
   font-size: 25px; /* Ensure consistent font size */
   text-shadow: -1px 1px 1px black;
@@ -50,22 +51,24 @@ body {
 }
 
 #time {
+  order: 2;
   color: var(--main-color);
   font-size: 25px; /* Ensure consistent font size */
 }
 
 #countdown-container {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 10px;
+  right: 20px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 #countdown {
-  position: relative;
+  position: static;
   display: flex;
   align-items: center;
-  right: -15px;
-  bottom: 38px;
   font-style: italic;
   background-image: linear-gradient(
     to right,
@@ -94,17 +97,13 @@ body {
 #countdown-display {
   position: relative;
   font-size: 25px;
-  right: 135px;
-  bottom: 5px;
   color: white;
   font-style: italic;
 }
 
 #logo {
-  position: absolute;
+  position: static;
   height: 60px;
-  bottom: 8px;
-  right: 20px;
   opacity: 0.8;
   filter: drop-shadow(-1px 1px rgba(0, 0, 0, 0.5));
 }
