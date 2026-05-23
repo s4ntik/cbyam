@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================
 
   const JSON_URL =
-    "https://api.npoint.io/0689840ed795f3f9e622";
+    "http://158.101.196.29:8000/data";
 
   let currentData = null;
   let pollingDelay = 5000;
