@@ -105,7 +105,8 @@ document.addEventListener("DOMContentLoaded", function () {
         method: "GET",
         cache: "no-store",
         headers: {
-          "Accept": "application/json"
+          "Accept": "application/json",
+		  "ngrok-skip-browser-warning": "true"
         }
       });
 
