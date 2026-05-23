@@ -85,15 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =========================
-  // Fetch Logic - Updated for Oracle Server
+  // Fetch Logic - Using ngrok HTTPS URL
   // =========================
 
-  // Your Oracle server URL (use HTTPS proxy or enable CORS on server)
-  const ORACLE_SERVER_URL = "http://158.101.196.29:8000/data";
-  
-  // Use a CORS proxy that supports HTTPS
-  const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
-  const USE_PROXY = true; // Set to false if you enable CORS on your Oracle server
+  // YOUR NEW HTTPS URL FROM NGROK
+  const API_URL = "https://hypnotist-condone-financial.ngrok-free.dev/data";
 
   let currentData = null;
   let pollingDelay = 5000;
@@ -105,20 +101,11 @@ document.addEventListener("DOMContentLoaded", function () {
     isFetching = true;
 
     try {
-      let url;
-      if (USE_PROXY) {
-        // Use CORS proxy to avoid mixed content and CORS issues
-        url = `${CORS_PROXY}${ORACLE_SERVER_URL}?t=${Date.now()}`;
-      } else {
-        url = `${ORACLE_SERVER_URL}?t=${Date.now()}`;
-      }
-
-      const response = await fetch(url, {
+      const response = await fetch(`${API_URL}?t=${Date.now()}`, {
         method: "GET",
         cache: "no-store",
         headers: {
-          "Accept": "application/json",
-          "Origin": window.location.origin
+          "Accept": "application/json"
         }
       });
 
@@ -134,51 +121,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const data = await response.json();
 
+      // Reset polling delay on success
       pollingDelay = 5000;
 
+      // Only update if changed
       if (JSON.stringify(data) !== JSON.stringify(currentData)) {
         currentData = data;
         updateJsonData(data);
+        console.log("Data updated:", new Date().toISOString());
       }
     } catch (error) {
-      console.warn("Direct fetch failed:", error);
-      await tryProxyFallback();
+      console.warn("Fetch failed:", error);
+      // Slow down after failures
       pollingDelay = Math.min(pollingDelay * 2, 60000);
     } finally {
       isFetching = false;
       setTimeout(fetchData, pollingDelay);
-    }
-  }
-
-  async function tryProxyFallback() {
-    try {
-      // Try different proxy services
-      const proxies = [
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(ORACLE_SERVER_URL)}`,
-        `https://corsproxy.io/?${encodeURIComponent(ORACLE_SERVER_URL)}`,
-        `https://proxy.cors.sh/${ORACLE_SERVER_URL}`
-      ];
-
-      for (const proxyUrl of proxies) {
-        try {
-          const response = await fetch(proxyUrl);
-          if (response.ok) {
-            const text = await response.text();
-            if (text.trim().startsWith("{")) {
-              const data = JSON.parse(text);
-              if (JSON.stringify(data) !== JSON.stringify(currentData)) {
-                currentData = data;
-                updateJsonData(data);
-              }
-              return;
-            }
-          }
-        } catch (e) {
-          console.warn(`Proxy ${proxyUrl} failed:`, e);
-        }
-      }
-    } catch (proxyError) {
-      console.error("All proxies failed:", proxyError);
     }
   }
 
@@ -266,6 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updateClock();
       setInterval(updateClock, 1000);
       fetchData();
+      console.log("Viewer initialized, fetching from:", API_URL);
     } catch (error) {
       console.error("Initialization error:", error);
       setTimeout(initialize, 2000);
