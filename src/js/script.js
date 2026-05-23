@@ -8,64 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let countdownInterval = null;
 
   // =========================
-  // DVD STATUS ANIMATION
-  // =========================
-
-  const siteStatus = document.getElementById("json-data");
-
-  let dvdRunning = false;
-  let x = 100;
-  let y = 100;
-  let dx = 2;
-  let dy = 2;
-  let dvdFrame = null;
-
-  function startDVD() {
-    if (dvdRunning || !siteStatus) return;
-
-    dvdRunning = true;
-
-    siteStatus.style.position = "fixed";
-    siteStatus.style.zIndex = "9999";
-
-    function loop() {
-      const rect = siteStatus.getBoundingClientRect();
-
-      const maxX = window.innerWidth - rect.width;
-      const maxY = window.innerHeight - rect.height;
-
-      x += dx;
-      y += dy;
-
-      if (x <= 0 || x >= maxX) {
-        dx *= -1;
-        x = Math.max(0, Math.min(x, maxX));
-      }
-
-      if (y <= 0 || y >= maxY) {
-        dy *= -1;
-        y = Math.max(0, Math.min(y, maxY));
-      }
-
-      siteStatus.style.left = x + "px";
-      siteStatus.style.top = y + "px";
-
-      dvdFrame = requestAnimationFrame(loop);
-    }
-
-    dvdFrame = requestAnimationFrame(loop);
-  }
-
-  function stopDVD() {
-    dvdRunning = false;
-
-    if (dvdFrame) {
-      cancelAnimationFrame(dvdFrame);
-      dvdFrame = null;
-    }
-  }
-
-  // =========================
   // Helpers
   // =========================
 
@@ -82,7 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================
 
   function updateJsonData(data) {
-    if (!data) return;
+    if (!data) {
+      console.error("Data is undefined");
+      return;
+    }
 
     try {
       const siteStatus = document.getElementById("json-data");
@@ -96,39 +41,38 @@ document.addEventListener("DOMContentLoaded", function () {
       bigTextElement.innerHTML = replaceEmojiShortcodesWithImage(data["big-text"] || "");
       smallText2Element.innerHTML = replaceEmojiShortcodesWithImage(data["small-text2"] || "");
 
-      // Site status text
+      // Site status
       const username = data.username || "";
-      const site =
-        parseInt(data.site, 10) === 1
-          ? "CB"
-          : parseInt(data.site, 10) === 2
-          ? "SC"
-          : "Unknown";
+      const site = parseInt(data.site, 10) === 1 ? "CB" : parseInt(data.site, 10) === 2 ? "SC" : "Unknown";
 
       siteStatus.textContent = `${site}: ${username}`;
-
-      const statusOn = parseBoolean(data.status);
-
-      siteStatus.style.visibility = statusOn ? "visible" : "hidden";
-
-      // DVD animation toggle
-      if (statusOn) {
-        startDVD();
-      } else {
-        stopDVD();
-      }
+      siteStatus.style.visibility = parseBoolean(data.status) ? "visible" : "hidden";
 
       // BRB
       brb.style.visibility = parseBoolean(data.brb) ? "visible" : "hidden";
       brb.style.opacity = parseBoolean(data.brb) ? "1" : "0";
+      brb.style.transition = parseBoolean(data.brb) ? "opacity 2s linear" : "visibility 0s 2s, opacity 2s linear";
 
       // Ending
       end.style.visibility = parseBoolean(data.end) ? "visible" : "hidden";
       end.style.opacity = parseBoolean(data.end) ? "1" : "0";
+      end.style.transition = parseBoolean(data.end) ? "opacity 2s linear" : "visibility 0s 2s, opacity 2s linear";
 
       // Timer
       timer.style.visibility = parseBoolean(data.timer) ? "visible" : "hidden";
       timer.style.opacity = parseBoolean(data.timer) ? "1" : "0";
+      timer.classList.remove("slide-in", "slide-out");
+      timer.classList.add(parseBoolean(data.timer) ? "slide-out" : "slide-in");
+
+      // Custom opacity
+      if (data["user-opacity"]) {
+        siteStatus.style.opacity = data["user-opacity"];
+      }
+
+      // Custom font size
+      if (data["user-size"]) {
+        siteStatus.style.fontSize = data["user-size"];
+      }
 
       // Countdown
       if (data.countdown) {
@@ -141,9 +85,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =========================
-  // FETCH DATA
+  // Fetch Logic - Using ngrok HTTPS URL
   // =========================
 
+  // YOUR NEW HTTPS URL FROM NGROK
   const API_URL = "https://hypnotist-condone-financial.ngrok-free.dev/data";
 
   let currentData = null;
@@ -152,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function fetchData() {
     if (isFetching) return;
+
     isFetching = true;
 
     try {
@@ -159,23 +105,35 @@ document.addEventListener("DOMContentLoaded", function () {
         method: "GET",
         cache: "no-store",
         headers: {
-          Accept: "application/json",
-          "ngrok-skip-browser-warning": "true",
-        },
+          "Accept": "application/json",
+		  "ngrok-skip-browser-warning": "true"
+        }
       });
 
-      if (response.ok) {
-        const data = await response.json();
-
-        if (JSON.stringify(data) !== JSON.stringify(currentData)) {
-          currentData = data;
-          updateJsonData(data);
-        }
-
-        pollingDelay = 5000;
+      if (response.status === 429) {
+        console.warn("Rate limited. Increasing delay...");
+        pollingDelay = Math.min(pollingDelay * 2, 60000);
+        return;
       }
-    } catch (err) {
-      console.warn("Fetch failed:", err);
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Reset polling delay on success
+      pollingDelay = 5000;
+
+      // Only update if changed
+      if (JSON.stringify(data) !== JSON.stringify(currentData)) {
+        currentData = data;
+        updateJsonData(data);
+        console.log("Data updated:", new Date().toISOString());
+      }
+    } catch (error) {
+      console.warn("Fetch failed:", error);
+      // Slow down after failures
       pollingDelay = Math.min(pollingDelay * 2, 60000);
     } finally {
       isFetching = false;
@@ -184,10 +142,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =========================
-  // CLOCK
+  // Clock
   // =========================
 
   function updateClock() {
+    if (!dateOutput || !timeOutput) {
+      console.error("Missing clock elements");
+      return;
+    }
+
     const now = new Date();
 
     dateOutput.innerText = now.toLocaleDateString("en-US", {
@@ -196,50 +159,144 @@ document.addEventListener("DOMContentLoaded", function () {
       year: "numeric",
     });
 
-    timeOutput.innerText = now.toLocaleTimeString("en-US", {
+    const timeString = now.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
     });
+
+    const match = timeString.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+    
+    if (match) {
+      const hours = match[1];
+      const minutes = match[2];
+      const period = match[3];
+      timeOutput.innerHTML = `${hours}:${minutes} ${period}`;
+    }
   }
 
   // =========================
-  // COUNTDOWN
+  // Countdown
   // =========================
 
-  function startCountdown(y, m, d, h, min) {
-    if (countdownInterval) clearInterval(countdownInterval);
-
-    const target = new Date(y, m - 1, d, h, min);
+  function startCountdown(targetYear, targetMonth, targetDay, targetHour, targetMinute) {
+    if (countdownInterval) {
+      clearInterval(countdownInterval);
+    }
 
     countdown.innerText = "Stream ends in";
 
-    countdownInterval = setInterval(() => {
-      const diff = target - new Date();
+    const targetTime = new Date(targetYear, targetMonth - 1, targetDay, targetHour, targetMinute, 0);
 
-      if (diff <= 0) {
+    if (Date.now() > targetTime.getTime()) {
+      countdown.innerText = "Stream is OVER!";
+      countdownDisplay.innerText = "Thanks everyone for your support!!";
+      countdownDisplay.style.color = "white";
+      return;
+    }
+
+    countdownInterval = setInterval(() => {
+      const now = new Date();
+      const timeDiff = targetTime.getTime() - now.getTime();
+
+      if (timeDiff <= 0) {
         clearInterval(countdownInterval);
-        countdownDisplay.innerText = "Stream is OVER!";
+        countdown.innerText = "Stream is OVER!";
+        countdownDisplay.innerText = "Thanks to everyone for your Tips, See you next Time!";
+        countdownDisplay.style.color = "white";
+        countdownFinished = true;
         return;
       }
 
-      const hours = Math.floor(diff / 3600000);
-      const minutes = Math.floor((diff % 3600000) / 60000);
-      const seconds = Math.floor((diff % 60000) / 1000);
+      const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24).toString().padStart(2, "0");
+      const minutes = Math.floor((timeDiff / (1000 * 60)) % 60).toString().padStart(2, "0");
+      const seconds = Math.floor((timeDiff / 1000) % 60).toString().padStart(2, "0");
 
-      countdownDisplay.innerText =
-        `${hours}h ${minutes}m ${seconds}s`;
+      countdownDisplay.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
   }
 
   // =========================
-  // INIT
+  // Bounce Animation
+  // =========================
+
+  function bounceJsonData() {
+    const jsonData =
+      document.getElementById("json-data");
+
+    if (!jsonData) {
+      console.error(
+        "#json-data not found"
+      );
+
+      return;
+    }
+
+    let x = 0;
+    let y = 0;
+
+    let xDirection = 1;
+    let yDirection = 1;
+
+    const speed = 2;
+
+    function move() {
+      const parentWidth =
+        window.innerWidth;
+
+      const parentHeight =
+        window.innerHeight;
+
+      x += xDirection * speed;
+      y += yDirection * speed;
+
+      if (
+        x <= 0 ||
+        x + jsonData.offsetWidth >= parentWidth
+      ) {
+        xDirection *= -1;
+      }
+
+      if (
+        y <= 0 ||
+        y + jsonData.offsetHeight >=
+          parentHeight
+      ) {
+        yDirection *= -1;
+      }
+
+      jsonData.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+      requestAnimationFrame(move);
+    }
+
+    move();
+  }
+
+  // =========================
+  // Initialize
   // =========================
 
   function initialize() {
-    updateClock();
-    setInterval(updateClock, 1000);
-    fetchData();
+    try {
+      updateClock();
+
+      setInterval(updateClock, 1000);
+
+      fetchData();
+
+      setInterval(resetContainer, 22000);
+
+      bounceJsonData();
+    } catch (error) {
+      console.error(
+        "Initialization error:",
+        error
+      );
+
+      setTimeout(initialize, 2000);
+    }
   }
 
   initialize();
