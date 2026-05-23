@@ -286,8 +286,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       fetchData();
 
-      setInterval(resetContainer, 22000);
-
       bounceJsonData();
     } catch (error) {
       console.error(
